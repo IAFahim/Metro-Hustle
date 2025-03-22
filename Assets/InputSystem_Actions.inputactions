@@ -990,6 +990,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "91174c10-fb3b-48ef-b1ab-7fe5d8e3f5c0",
+            "actions": [
+                {
+                    "name": "Time Scale Double",
+                    "type": "Button",
+                    "id": "a32fa31e-e1e8-4cf0-b297-99616ea2007c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Time Scale Halve",
+                    "type": "Button",
+                    "id": "c054281e-d940-4cb1-93fb-bd48a9a681fa",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af28b271-cc3a-4131-b193-01eebae1f165",
+                    "path": "<Keyboard>/equals",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time Scale Double",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e17ac50a-2dc8-4d9a-943d-6b9c8abbce42",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time Scale Halve",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
