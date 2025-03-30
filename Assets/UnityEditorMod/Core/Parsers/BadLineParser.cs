@@ -7,26 +7,16 @@
             out int length
         )
         {
-            var activatorIndex = line.IndexOf(activator);
             startIndex = 0;
             length = 0;
-            var openingIndex = activatorIndex + 1;
-            if (activatorIndex >= 0 && openingIndex < line.Length && line[openingIndex] == opening)
-            {
-                for (int i = openingIndex; i < line.Length; i++)
-                {
-                    if (line[i] != closing)
-                    {
-                        length++;
-                        continue;
-                    }
-
-                    startIndex = openingIndex;
-                    return true;
-                }
-            }
-
-            return false;
+            var activatorIndex = line.IndexOf(activator);
+            if (activatorIndex < 0) return false;
+            var openingIndex = line.IndexOf(opening, activatorIndex + 1);
+            startIndex = openingIndex + 1;
+            if (openingIndex < 0) return false;
+            var closingIndex = line.IndexOf(closing, openingIndex);
+            length = closingIndex - startIndex;
+            return true;
         }
     }
 }

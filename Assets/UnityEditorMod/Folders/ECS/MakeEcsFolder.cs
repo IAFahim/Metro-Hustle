@@ -8,7 +8,7 @@ namespace UnityEditorMod.Folders.ECS
 {
     internal static class MakeEcsFolder
     {
-        private const string EcsAsmdefFileName = "ecs.template.asmdef";
+        private const string EcsAsmdefFileName = "template.asmdef";
 
         [MenuItem("Assets/Create/ECS Util/Generate ECS Script Folder", priority = -1000)]
         private static void InitCreateEcs()
@@ -24,35 +24,49 @@ namespace UnityEditorMod.Folders.ECS
         {
             public override void Action(int instanceId, string pathName, string _)
             {
-                var createdFile = Path.GetFileName(pathName);
-                var parentFolder = CreateFolder(pathName, createdFile);
-                var runtimeFolder = CreateSubFolder(parentFolder.createdPath, "Runtime");
-                var dataFolder = CreateSubFolder(runtimeFolder.createdPath, "Datas");
-                var systemFolder = CreateSubFolder(runtimeFolder.createdPath, "Systems");
-                ProjectWindowUtil.ShowCreatedAsset(dataFolder.createdObject);
-                GenerateGuid();
+                var fileName = Path.GetFileName(pathName);
+                var folderPath = CreateFolder(pathName, fileName);
+                CreateChildrenAndParentFolders(folderPath, "Runtime", "Datas", "Systems");
+                CreateFolder(folderPath, "Editor");
+                AssetDatabase.Refresh();
+
+                var createdObject = AssetDatabase.LoadAssetAtPath(folderPath, typeof(Object));
+                ProjectWindowUtil.ShowCreatedAsset(createdObject);
+                TryGetAssetByName<TextAsset>(EcsAsmdefFileName, out var ecsTemplate);
             }
 
-            private static void GenerateGuid()
+            private string[] CreateChildrenAndParentFolders(string folderPath, string parentFolder,
+                params string[] childrens)
             {
-                var asmdefTemplate = AssetDatabase.FindAssets(EcsAsmdefFileName);
-                if (asmdefTemplate.Length == 0) return;
-                var assetGuid = AssetDatabase.GUIDToAssetPath(asmdefTemplate[0]);
-                var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(assetGuid);
-                Debug.Log(asset.text);
+                var parentSubFolder = CreateSubFolder(folderPath, parentFolder);
+                var childrenSubFolders = new string[childrens.Length];
+                for (var i = 0; i < childrens.Length; i++)
+                {
+                    childrenSubFolders[i] = CreateSubFolder(parentSubFolder, childrens[i]);
+                }
+
+                return childrenSubFolders;
             }
 
-            private static (Object createdObject, string createdPath) CreateFolder(string pathName,
+            private static bool TryGetAssetByName<T>(string filter, out T asset) where T : Object
+            {
+                asset = null;
+                var asmdefTemplate = AssetDatabase.FindAssets(filter);
+                if (asmdefTemplate.Length == 0) return false;
+                var assetGuid = AssetDatabase.GUIDToAssetPath(asmdefTemplate[0]);
+                asset = AssetDatabase.LoadAssetAtPath<T>(assetGuid);
+                return true;
+            }
+
+            private static string CreateFolder(string pathName,
                 string fileName)
             {
                 var directoryName = Path.GetDirectoryName(pathName);
                 var createdFolder = AssetDatabase.CreateFolder(directoryName, fileName);
-                var createdPath = AssetDatabase.GUIDToAssetPath(createdFolder);
-                var createdObject = AssetDatabase.LoadAssetAtPath(createdPath, typeof(Object));
-                return (createdObject, createdPath);
+                return AssetDatabase.GUIDToAssetPath(createdFolder);
             }
 
-            private (Object createdObject, string createdPath) CreateSubFolder(string pathName, string folderName)
+            private string CreateSubFolder(string pathName, string folderName)
             {
                 var pathCombined = Path.Combine(pathName, folderName);
                 return CreateFolder(pathCombined, folderName);
