@@ -1,0 +1,16 @@
+﻿{
+    "name": "${NAME}",
+    "rootNamespace": "",
+    "references": [
+        <references.txt/>
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
