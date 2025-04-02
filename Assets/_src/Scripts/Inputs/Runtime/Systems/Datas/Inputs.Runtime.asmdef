@@ -1,5 +1,5 @@
 {
-    "name": "Movements.Runtime.System",
+    "name": "Inputs.Runtime",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",
@@ -8,8 +8,8 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "ECS.Movement.Runtime",
-        "Speeds.Runtime.Datas"
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
