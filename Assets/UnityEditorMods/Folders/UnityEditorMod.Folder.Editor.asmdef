@@ -1,5 +1,5 @@
 {
-    "name": "unity.util.folder.ecs.editor",
+    "name": "UnityEditorMod.Folder.Editor",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [

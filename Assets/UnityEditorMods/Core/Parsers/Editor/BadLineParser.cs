@@ -1,4 +1,4 @@
-﻿namespace UnityEditorMod.Core.Parsers
+﻿namespace UnityEditorMods.Core.Parsers
 {
     public static class BadLineParser
     {
