@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace _src.Scripts.Movements.Runtime.Datas
+namespace Movements.Runtime.Datas
 {
     public class TargetPositionComponentDataAuthoring : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-namespace _src.Scripts.Movements.Runtime.Datas
+namespace Speeds.Runtime.Datas
 {
     public class SpeedComponentDataAuthoring : MonoBehaviour
     {

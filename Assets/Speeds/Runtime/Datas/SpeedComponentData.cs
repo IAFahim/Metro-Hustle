@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-namespace _src.Scripts.Movements.Runtime.Datas
+namespace Speeds.Runtime.Datas
 {
     public struct SpeedComponentData : IComponentData
     {

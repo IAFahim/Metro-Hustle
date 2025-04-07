@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 
-namespace _src.Scripts.Movements.Runtime.Datas
+namespace Movements.Runtime.Datas
 {
     public partial struct TargetPositionComponentData : IComponentData
     {

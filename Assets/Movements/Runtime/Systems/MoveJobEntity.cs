@@ -1,8 +1,8 @@
-﻿using _src.Scripts.Movements.Runtime.Datas;
+﻿using Speeds.Runtime.Datas;
 using Unity.Entities;
 using Unity.Transforms;
 
-namespace _src.Scripts.Movements.Runtime.Systems
+namespace Movements.Runtime.Systems
 {
     public partial struct MoveJobEntity : IJobEntity
     {

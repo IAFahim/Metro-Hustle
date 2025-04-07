@@ -1,25 +1,27 @@
 ﻿using Unity.Burst;
 using Unity.Entities;
 
-namespace _src.Scripts.Movements.Runtime.Systems
+namespace Movements.Runtime.Systems
 {
-    public partial struct MoveSystem : ISystem
+    public partial struct TargetTeleportSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var moveJobEntity = new Runtime.Systems.MoveJobEntity();
-            moveJobEntity.ScheduleParallel();
+            var targetTeleportJobEntity = new global::Movements.Runtime.Systems.TargetTeleportJobEntity();
+            targetTeleportJobEntity.ScheduleParallel();
         }
 
         [BurstCompile]
         public void OnDestroy(ref SystemState state)
         {
+
         }
     }
 }
