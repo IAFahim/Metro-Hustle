@@ -18,7 +18,8 @@ MonoBehaviour:
   - Debug
   - UI
   cursorPosition: {fileID: -1654692200621890270, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  settings: []
+  settings:
+  - rid: 7979647598793851162
   debugSettings:
   - rid: 2258541242412171264
   references:
@@ -30,3 +31,11 @@ MonoBehaviour:
         Name: InputCoreDebug
         TimeScaleDouble: {fileID: 4785413866448883788, guid: 052faaac586de48259a63d0c4782560b, type: 3}
         TimeScaleHalve: {fileID: -4621389477886909220, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - rid: 7979647598793851162
+      type: {class: InputCoreComponentData/Settings, ns: BovineLabs.Core.Input, asm: InputProvider}
+      data:
+        Name: InputCoreComponentData
+        MoveCurrent: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+        MoveDelta: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+        Sprint: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+        Jump: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}

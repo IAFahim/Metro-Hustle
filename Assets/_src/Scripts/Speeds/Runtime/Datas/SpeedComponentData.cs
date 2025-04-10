@@ -1,9 +1,18 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 
-namespace Speeds.Runtime.Datas
+namespace _src.Scripts.Speeds.Runtime.Datas
 {
-    public struct SpeedComponentData : IComponentData
+    [BurstCompile]
+    public partial struct SpeedComponentData : IComponentData
     {
-        public float Speed;
+        public float BaseSpeed;
+        public float Multiplier;
+
+        [BurstCompile]
+        public readonly float GetCurrentSpeed()
+        {
+            return BaseSpeed * Multiplier;
+        }
     }
 }

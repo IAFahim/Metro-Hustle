@@ -9,7 +9,6 @@ namespace ECS_Spline.Runtime.Datas
     [RequireComponent(typeof(SplineContainer))]
     public class SplineComponentAuthoring : MonoBehaviour
     {
-        public TransformUsageFlags transformUsageFlags;
         public class SplineComponentBaker : Baker<SplineComponentAuthoring>
         {
             public override void Bake(SplineComponentAuthoring authoring)
@@ -31,7 +30,7 @@ namespace ECS_Spline.Runtime.Datas
                     spline.Closed,
                     transformationMatrix);
 
-                var entity = GetEntity(authoring.transformUsageFlags);
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
 
                 AddBlobAsset(ref nativeSplineBlobAssetRef, out _);
 

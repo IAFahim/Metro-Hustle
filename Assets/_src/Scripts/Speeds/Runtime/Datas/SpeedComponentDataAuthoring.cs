@@ -1,18 +1,23 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-namespace Speeds.Runtime.Datas
+namespace _src.Scripts.Speeds.Runtime.Datas
 {
     public class SpeedComponentDataAuthoring : MonoBehaviour
     {
         public float speed = 0.001f;
+        public float multiplier = 1;
 
         public class SpeedComponentDataBaker : Baker<SpeedComponentDataAuthoring>
         {
             public override void Bake(SpeedComponentDataAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new SpeedComponentData { Speed = authoring.speed });
+                AddComponent(entity, new SpeedComponentData
+                {
+                    BaseSpeed = authoring.speed,
+                    Multiplier = authoring.multiplier
+                });
             }
         }
     }
