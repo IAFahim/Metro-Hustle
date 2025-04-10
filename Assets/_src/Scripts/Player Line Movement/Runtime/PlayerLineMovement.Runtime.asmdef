@@ -1,0 +1,27 @@
+{
+    "name": "PlayerLineMovement.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Entities",
+        "Unity.Transforms",
+        "Unity.Entities.Hybrid",
+        "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Mathematics",
+        "Inputs.Runtime",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions",
+        "MainPlayerMaker.Runtime",
+        "Speeds.Runtime.Datas",
+        "InputProvider"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
