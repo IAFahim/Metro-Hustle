@@ -22,13 +22,11 @@ namespace ECS_Spline.Runtime.Datas
                 }
 
                 var spline = splineContainer.Spline;
-                float4x4 transformationMatrix = splineContainer.transform.localToWorldMatrix;
                 using var nativeSpline = new NativeSpline(spline, Allocator.Temp);
 
                 var nativeSplineBlobAssetRef = NativeSplineBlob.CreateNativeSplineBlobAssetRef(
                     nativeSpline,
-                    spline.Closed,
-                    transformationMatrix);
+                    spline.Closed);
 
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 

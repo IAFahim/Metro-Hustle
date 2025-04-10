@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: PanelSettings
+  m_Name: MVVMPanel
   m_EditorClassIdentifier: 
-  themeUss: {fileID: 4413694071827464959, guid: 167a39291235b4843a07ea4626fd8bf5, type: 3}
+  themeUss: {fileID: -4733365628477956816, guid: ae0fff9564a9241c4999c8d99e837b89, type: 3}
   m_DisableNoThemeWarning: 0
   m_TargetTexture: {fileID: 0}
   m_RenderMode: 0

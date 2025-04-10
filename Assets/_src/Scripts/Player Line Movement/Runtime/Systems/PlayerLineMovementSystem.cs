@@ -28,7 +28,7 @@ namespace _src.Scripts.Player_Line_Movement.Runtime.Systems
             var splineEntity = SystemAPI.GetSingletonEntity<SplineBlobAssetComponent>();
             var splineLocalTransform = SystemAPI.GetComponent<LocalTransform>(splineEntity);
             var splineBlobAssetComponent = SystemAPI.GetComponent<SplineBlobAssetComponent>(splineEntity);
-            ref var knots = ref splineBlobAssetComponent.Reference.Value.knots;
+            ref var knots = ref splineBlobAssetComponent.Reference.Value.Knots;
 
             foreach (
                 var (

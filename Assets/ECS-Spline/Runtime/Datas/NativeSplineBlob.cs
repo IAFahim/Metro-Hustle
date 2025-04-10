@@ -9,61 +9,45 @@ namespace ECS_Spline.Runtime.Datas
 {
     public struct NativeSplineBlob
     {
-        public BlobArray<BezierKnot> knots;
-        public bool closed;
-        public float4x4 transformMatrix;
+        public BlobArray<BezierKnot> Knots;
+        public BlobArray<BezierCurve> Curves;
+        public BlobArray<DistanceToInterpolation> SegmentLengthsLookupTable;
+        public BlobArray<float3> UpVectorsLookupTable;
+        public bool Closed;
+        public float Length;
+        public const int SegmentResolution = 30;
 
         public static BlobAssetReference<NativeSplineBlob> CreateNativeSplineBlobAssetRef
         (
             NativeSpline nativeSpline,
-            bool isClosed,
-            float4x4 transformMatrix
+            bool isClosed
         )
         {
-            // Riping values
-            var knots = nativeSpline.Knots;
-
             // Constructing blob
             using var nativeSplineBuilder = new BlobBuilder(Allocator.Temp);
             ref var nativeSplineRoot = ref nativeSplineBuilder.ConstructRoot<NativeSplineBlob>();
-
-            var knotsBuilder = nativeSplineBuilder.Allocate(ref nativeSplineRoot.knots, knots.Length);
-            for (int i = 0; i < knots.Length; i++)
-            {
-                knotsBuilder[i] = knots[i];
-            }
-
-            nativeSplineRoot.closed = isClosed;
-            nativeSplineRoot.transformMatrix = transformMatrix;
+            
+            StoreKnots(nativeSplineBuilder, ref nativeSplineRoot, nativeSpline.Knots);
+            StoreCurves(nativeSplineBuilder, ref nativeSplineRoot, nativeSpline.Curves);
+            nativeSplineRoot.Closed = isClosed;
 
             return nativeSplineBuilder
                 .CreateBlobAssetReference<NativeSplineBlob>(Allocator.Persistent);
         }
-    }
 
-    public readonly struct KnotsReadonlyCollection : IReadOnlyList<BezierKnot>
-    {
-        private readonly NativeList<BezierKnot> _knots;
-
-        public KnotsReadonlyCollection(NativeList<BezierKnot> knots)
+        private static void StoreCurves(BlobBuilder nativeSplineBuilder, ref NativeSplineBlob nativeSplineRoot, NativeArray<BezierCurve> curves)
         {
-            _knots = knots;
+            var length = curves.Length;
+            var curveBuilder = nativeSplineBuilder.Allocate(ref nativeSplineRoot.Curves, length);
+            for (int i = 0; i < length; i++) curveBuilder[i] = curves[i];
         }
 
-        public IEnumerator<BezierKnot> GetEnumerator()
+        private static void StoreKnots(BlobBuilder nativeSplineBuilder, ref NativeSplineBlob nativeSplineRoot,
+            NativeArray<BezierKnot> knots)
         {
-            for (var i = 0; i < _knots.Length; i++)
-            {
-                yield return _knots[i];
-            }
+            var length = knots.Length;
+            var knotsBuilder = nativeSplineBuilder.Allocate(ref nativeSplineRoot.Knots, length);
+            for (int i = 0; i < length; i++) knotsBuilder[i] = knots[i];
         }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public BezierKnot this[int index] => _knots[index];
-        public int Count => _knots.Length;
     }
 }
