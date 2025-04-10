@@ -2,7 +2,7 @@
 
 namespace ECS_Spline.Runtime.Datas
 {
-    public struct SplineBlobAssetComponent : IComponentData
+    public struct NativeSplineBlobComponentData : IComponentData
     {
         public BlobAssetReference<NativeSplineBlob> Reference;
     }
