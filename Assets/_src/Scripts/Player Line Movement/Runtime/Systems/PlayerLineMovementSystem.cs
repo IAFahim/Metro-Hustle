@@ -23,7 +23,7 @@ namespace _src.Scripts.Player_Line_Movement.Runtime.Systems
             var splineForwardMovementJobEntity = new SplineForwardMovementJobEntity
             {
                 SplineLocalTransform = SystemAPI.GetComponent<LocalTransform>(splineEntity),
-                NativeSplineBlob = SystemAPI.GetComponent<NativeSplineBlobComponentData>(splineEntity).Reference,
+                NativeSplineBlob = SystemAPI.GetComponent<NativeSplineBlobComponentData>(splineEntity).Value,
             };
             splineForwardMovementJobEntity.ScheduleParallel();
         }

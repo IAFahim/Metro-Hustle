@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1741924226}
   - component: {fileID: 1741924225}
   - component: {fileID: 1741924227}
+  - component: {fileID: 1741924228}
   m_Layer: 0
   m_Name: Barangar Spline
   m_TagString: Untagged
@@ -515,8 +516,165 @@ MonoBehaviour:
       m_Data: []
     m_ObjectData:
       m_Data: []
+  - m_EditModeType: 1
+    m_Knots:
+    - Position:
+        x: 0
+        y: 0
+        z: 0
+      TangentIn:
+        x: 0
+        y: 0
+        z: -1
+      TangentOut:
+        x: 0
+        y: 0
+        z: 1
+      Rotation:
+        value:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+    - Position:
+        x: 0
+        y: 0
+        z: 300
+      TangentIn:
+        x: 0
+        y: 0
+        z: -1
+      TangentOut:
+        x: 0
+        y: 0
+        z: 1
+      Rotation:
+        value:
+          x: 0
+          y: 0
+          z: 0
+          w: 1
+    - Position:
+        x: -150.28906
+        y: 0
+        z: 414.28613
+      TangentIn:
+        x: -0
+        y: -0
+        z: -45.95904
+      TangentOut:
+        x: 0
+        y: 0
+        z: 38.265575
+      Rotation:
+        value:
+          x: 0
+          y: -0.7025733
+          z: -0
+          w: 0.71161145
+    - Position:
+        x: -256.46436
+        y: 0
+        z: 337.74902
+      TangentIn:
+        x: -0
+        y: -0
+        z: -43.807667
+      TangentOut:
+        x: 0
+        y: 0
+        z: 54.26756
+      Rotation:
+        value:
+          x: 0
+          y: 0.9673708
+          z: 0
+          w: -0.2533647
+    - Position:
+        x: -272.1985
+        y: 0
+        z: 137.51562
+      TangentIn:
+        x: -0
+        y: -0
+        z: -42.339447
+      TangentOut:
+        x: 0
+        y: 0
+        z: 35.80334
+      Rotation:
+        value:
+          x: 0
+          y: 0.9339962
+          z: 0
+          w: 0.35728312
+    - Position:
+        x: -128.64233
+        y: 0
+        z: 133.07129
+      TangentIn:
+        x: -0
+        y: -0
+        z: -46.701626
+      TangentOut:
+        x: 0
+        y: 0
+        z: 56.571423
+      Rotation:
+        value:
+          x: 0
+          y: 0.53506255
+          z: 0
+          w: 0.8448125
+    - Position:
+        x: 0
+        y: 0
+        z: 300
+      TangentIn:
+        x: -0
+        y: -0
+        z: -21.07464
+      TangentOut:
+        x: 0
+        y: 0
+        z: 21.07464
+      Rotation:
+        value:
+          x: 0
+          y: 0.3224257
+          z: 0
+          w: 0.94659483
+    m_MetaData:
+    - Mode: 2
+      Tension: 0.5
+    - Mode: 2
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    m_Closed: 0
+    m_IntData:
+      m_Data: []
+    m_FloatData:
+      m_Data: []
+    m_Float4Data:
+      m_Data: []
+    m_ObjectData:
+      m_Data: []
   m_Knots:
-    m_KnotsLink: []
+    m_KnotsLink:
+    - Knots:
+      - Spline: 1
+        Knot: 1
+      - Spline: 1
+        Knot: 6
 --- !u!4 &1741924226
 Transform:
   m_ObjectHideFlags: 0
@@ -539,12 +697,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741924224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 679b3f2d33054e8990e09fd102fa8818, type: 3}
+  m_Script: {fileID: 11500000, guid: f0538c9f3ae1459ca05c65205fb58ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cacheUpVectors: 1
+  bakingSpace: 0
+--- !u!114 &1741924228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741924224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201754c47e794a4ca31c29d51922d900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheUpVectors: 1
+  bakingSpace: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

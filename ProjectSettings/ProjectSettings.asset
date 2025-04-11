@@ -894,7 +894,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -916,11 +922,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 623a1d2c-2773-4c79-904a-5e32c407d155
+  cloudProjectId: 5221f3b7-4516-45bf-8c05-d10189a60a2a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Metro Hustle
-  organizationId: fahimmanowarj5
+  organizationId: unity_f632236d085030d4644d
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 460723442}
   - component: {fileID: 460723443}
   - component: {fileID: 460723444}
+  - component: {fileID: 460723445}
+  - component: {fileID: 460723446}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -187,7 +189,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460723440}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c33c946bfc54930aff5e535a1ba5bb7, type: 3}
   m_Name: 
@@ -195,6 +197,35 @@ MonoBehaviour:
   splineIndex: 0
   knotIndex: 0
   progress: 0
+--- !u!114 &460723445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460723440}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7a4165091f494aa999264710420452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1000
+--- !u!114 &460723446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460723440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e1c6100d754e92b8ead7dc9d21d996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetSplineIndex: 1
+  InitialNormalizedTime: 0.286
+  Speed: 2
+  Offset: {x: 0, y: 0, z: 0}
 --- !u!1 &508957138
 GameObject:
   m_ObjectHideFlags: 0

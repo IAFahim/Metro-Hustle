@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using ECSSplines.Runtime;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -26,9 +27,8 @@ namespace ECS_Spline.Runtime.Datas
                 var spline = splineContainer.Spline;
                 using var nativeSpline = new NativeSpline(spline);
 
-                var nativeSplineBlobAssetRef = NativeSplineBlob.CreateNativeSplineBlobAssetRef(
+                var nativeSplineBlobAssetRef = NativeSplineBlobFactory.CreateBlob(
                     nativeSpline,
-                    authoring.transform.localToWorldMatrix,
                     authoring.cacheUpVectors
                 );
 
@@ -38,7 +38,7 @@ namespace ECS_Spline.Runtime.Datas
 
                 AddComponent(entity, new NativeSplineBlobComponentData
                 {
-                    Reference = nativeSplineBlobAssetRef
+                    Value = nativeSplineBlobAssetRef
                 });
             }
         }
