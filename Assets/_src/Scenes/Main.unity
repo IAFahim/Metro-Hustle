@@ -149,11 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f7ad24345a4f028c8d49507bed8c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetWorld: 1
-  loadMode: 0
-  isRequired: 1
-  loadMaxDistance: 128
-  unloadMaxDistance: 144
 --- !u!114 &215044732
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ namespace ECS_Spline.Runtime.Datas
     [RequireComponent(typeof(SplineContainer))]
     public class SplineComponentAuthoring : MonoBehaviour
     {
+        public bool cacheUpVectors = true;
+
         public class SplineComponentBaker : Baker<SplineComponentAuthoring>
         {
             public override void Bake(SplineComponentAuthoring authoring)
@@ -22,17 +24,19 @@ namespace ECS_Spline.Runtime.Datas
                 }
 
                 var spline = splineContainer.Spline;
-                using var nativeSpline = new NativeSpline(spline, Allocator.Temp);
+                using var nativeSpline = new NativeSpline(spline);
 
                 var nativeSplineBlobAssetRef = NativeSplineBlob.CreateNativeSplineBlobAssetRef(
                     nativeSpline,
-                    spline.Closed);
+                    authoring.transform.localToWorldMatrix,
+                    authoring.cacheUpVectors
+                );
 
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 
                 AddBlobAsset(ref nativeSplineBlobAssetRef, out _);
 
-                AddComponent(entity, new SplineBlobAssetComponent
+                AddComponent(entity, new NativeSplineBlobComponentData
                 {
                     Reference = nativeSplineBlobAssetRef
                 });
