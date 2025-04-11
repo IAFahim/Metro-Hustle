@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1741924226}
   - component: {fileID: 1741924225}
-  - component: {fileID: 1741924227}
   - component: {fileID: 1741924228}
   m_Layer: 0
   m_Name: Barangar Spline
@@ -541,19 +540,19 @@ MonoBehaviour:
         y: 0
         z: 300
       TangentIn:
-        x: 0
-        y: 0
-        z: -1
+        x: -0
+        y: -0
+        z: -79.26558
       TangentOut:
         x: 0
         y: 0
-        z: 1
+        z: 62.882988
       Rotation:
         value:
           x: 0
-          y: 0
-          z: 0
-          w: 1
+          y: -0.22813468
+          z: -0
+          w: 0.9736295
     - Position:
         x: -150.28906
         y: 0
@@ -579,35 +578,35 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -43.807667
+        z: -39.06311
       TangentOut:
         x: 0
         y: 0
-        z: 54.26756
+        z: 41.031425
       Rotation:
         value:
           x: 0
-          y: 0.9673708
+          y: 0.97605664
           z: 0
-          w: -0.2533647
+          w: -0.21751672
     - Position:
-        x: -272.1985
+        x: -246.48914
         y: 0
-        z: 137.51562
+        z: 193.68555
       TangentIn:
         x: -0
         y: -0
-        z: -42.339447
+        z: -41.032345
       TangentOut:
         x: 0
         y: 0
-        z: 35.80334
+        z: 39.30731
       Rotation:
         value:
           x: 0
-          y: 0.9339962
+          y: 0.95789516
           z: 0
-          w: 0.35728312
+          w: 0.28711814
     - Position:
         x: -128.64233
         y: 0
@@ -615,17 +614,17 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -46.701626
+        z: -37.856663
       TangentOut:
         x: 0
         y: 0
-        z: 56.571423
+        z: 47.73964
       Rotation:
         value:
           x: 0
-          y: 0.53506255
+          y: 0.62537307
           z: 0
-          w: 0.8448125
+          w: 0.78032595
     - Position:
         x: 0
         y: 0
@@ -647,7 +646,7 @@ MonoBehaviour:
     m_MetaData:
     - Mode: 2
       Tension: 0.5
-    - Mode: 2
+    - Mode: 0
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
@@ -690,20 +689,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1741924227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741924224}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0538c9f3ae1459ca05c65205fb58ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cacheUpVectors: 1
-  bakingSpace: 0
 --- !u!114 &1741924228
 MonoBehaviour:
   m_ObjectHideFlags: 0

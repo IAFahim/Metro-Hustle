@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
 
-namespace ECSSplines.Runtime
+namespace SplineMovement.Runtime.Datas
 {
     /// <summary>
     /// Component to track an entity's position and state relative to a specific spline

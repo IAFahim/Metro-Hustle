@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-namespace _src.Scripts.SplineMovement.Runtime.Datas
+namespace SplineMovement.Runtime.Datas
 {
     public struct SplineLinkComponentData : IComponentData
     {

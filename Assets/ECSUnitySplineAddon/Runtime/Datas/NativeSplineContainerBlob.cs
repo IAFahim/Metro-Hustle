@@ -1,13 +1,10 @@
-﻿using ECS_Spline.Runtime.Datas;
-using ECSUnitySplineAddon.Runtime.Datas;
-using Unity.Burst;
-using Unity.Collections;
+﻿using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace ECSSplines.Runtime
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     /// <summary>
     /// Unmanaged, immutable representation of a single Bezier Knot for use in Blobs.
@@ -71,13 +68,12 @@ namespace ECSSplines.Runtime
     /// Unmanaged, immutable representation of an entire SplineContainer,
     /// including all its splines, lookup tables, and knot links, suitable for ECS Blob Assets.
     /// </summary>
-
     /// <summary>
     /// Unmanaged, immutable representation of an entire SplineContainer,
     /// including all its splines, lookup tables, and knot links, suitable for ECS Blob Assets.
     /// </summary>
     [BurstCompile]
-    public struct NativeSplineContainerBlob
+    public partial struct NativeSplineContainerBlob
     {
         public BlobArray<SplineMetadataInBlob> SplineMetadatas;
 
@@ -123,7 +119,8 @@ namespace ECSSplines.Runtime
             if (curveIndexInSpline < 0 || curveIndexInSpline >= meta.CurveCount || DistanceLutResolution <= 0)
                 return 0f;
 
-            int lutIndex = meta.DistLutStartIndex + curveIndexInSpline * DistanceLutResolution + DistanceLutResolution - 1;
+            int lutIndex = meta.DistLutStartIndex + curveIndexInSpline * DistanceLutResolution + DistanceLutResolution -
+                           1;
             if (lutIndex >= DistanceLUT.Length) return 0f;
             return DistanceLUT[lutIndex].Distance;
         }
@@ -154,6 +151,7 @@ namespace ECSSplines.Runtime
                     curveT = GetCurveInterpolationFromDistance(splineIndex, curveIdxInSpline, distanceIntoCurve);
                     return curveIdxInSpline;
                 }
+
                 accumulatedDistance += currentCurveLength;
             }
 
@@ -170,10 +168,10 @@ namespace ECSSplines.Runtime
             int lutStartIndex = meta.DistLutStartIndex + curveIndexInSpline * DistanceLutResolution;
             int lutEndIndex = lutStartIndex + DistanceLutResolution - 1;
 
-             if (lutEndIndex >= DistanceLUT.Length) return 1f;
-             if (distanceInCurve >= DistanceLUT[lutEndIndex].Distance) return 1f;
+            if (lutEndIndex >= DistanceLUT.Length) return 1f;
+            if (distanceInCurve >= DistanceLUT[lutEndIndex].Distance) return 1f;
 
-             for (int i = 0; i < DistanceLutResolution - 1; ++i)
+            for (int i = 0; i < DistanceLutResolution - 1; ++i)
             {
                 int currentLutIndex = lutStartIndex + i;
                 ref readonly var prev = ref DistanceLUT[currentLutIndex];
@@ -187,6 +185,7 @@ namespace ECSSplines.Runtime
                     return math.lerp(prev.T, next.T, lerpFactor);
                 }
             }
+
             return 1f;
         }
 
@@ -202,11 +201,11 @@ namespace ECSSplines.Runtime
             return EvaluatePositionInternal(curve, curveT);
         }
 
-         /// <summary>Evaluates tangent on a specific spline at normalized time t.</summary>
+        /// <summary>Evaluates tangent on a specific spline at normalized time t.</summary>
         public float3 EvaluateTangent(int splineIndex, float splineT)
         {
             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-             if (meta.KnotCount < 2) return new float3(0, 0, 1);
+            if (meta.KnotCount < 2) return new float3(0, 0, 1);
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
             BlobBezierCurve curve = GetCurve(splineIndex, curveIdx);
@@ -216,57 +215,66 @@ namespace ECSSplines.Runtime
         /// <summary>Evaluates up vector on a specific spline at normalized time t.</summary>
         public float3 EvaluateUpVector(int splineIndex, float splineT)
         {
-             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-             if (meta.KnotCount < 2) return new float3(0, 1, 0);
+            ref readonly var meta = ref GetSplineMetadata(splineIndex);
+            if (meta.KnotCount < 2) return new float3(0, 1, 0);
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
 
             if (meta.UpVectorLutStartIndex >= 0 && UpVectorLUT.Length > 0)
             {
-                 int lutResolution = UpVectorLUT.Length / meta.CurveCount;
-                 int lutStartIndex = meta.UpVectorLutStartIndex + curveIdx * lutResolution;
+                int lutResolution = UpVectorLUT.Length / meta.CurveCount;
+                int lutStartIndex = meta.UpVectorLutStartIndex + curveIdx * lutResolution;
 
-                 if(lutResolution == 0) goto CalculateDynamically;
+                if (lutResolution == 0) goto CalculateDynamically;
 
-                 float segmentT = curveT * (lutResolution - 1);
+                float segmentT = curveT * (lutResolution - 1);
                 int index0 = math.min((int)math.floor(segmentT), lutResolution - 2);
                 int index1 = index0 + 1;
                 float lerpFactor = segmentT - index0;
 
-                 int globalIndex0 = lutStartIndex + index0;
-                 int globalIndex1 = lutStartIndex + index1;
+                int globalIndex0 = lutStartIndex + index0;
+                int globalIndex1 = lutStartIndex + index1;
 
-                 if (globalIndex0 < 0 || globalIndex1 >= UpVectorLUT.Length) goto CalculateDynamically;
+                if (globalIndex0 < 0 || globalIndex1 >= UpVectorLUT.Length) goto CalculateDynamically;
 
-                 return Vector3.Slerp(UpVectorLUT[globalIndex0], UpVectorLUT[globalIndex1], lerpFactor);
+                return Vector3.Slerp(UpVectorLUT[globalIndex0], UpVectorLUT[globalIndex1], lerpFactor);
             }
 
             CalculateDynamically:
             BlobBezierCurve curve = GetCurve(splineIndex, curveIdx);
             BlobBezierKnot knotStart = GetKnot(splineIndex, curveIdx);
-            int endKnotIndexInSpline = meta.Closed ? (curveIdx + 1) % meta.KnotCount : math.min(curveIdx + 1, meta.KnotCount - 1);
+            int endKnotIndexInSpline =
+                meta.Closed ? (curveIdx + 1) % meta.KnotCount : math.min(curveIdx + 1, meta.KnotCount - 1);
             BlobBezierKnot knotEnd = GetKnot(splineIndex, endKnotIndexInSpline);
 
             float3 startUp = math.rotate(knotStart.Rotation, math.up());
             float3 endUp = math.rotate(knotEnd.Rotation, math.up());
 
-            BezierCurve managedCurve = new BezierCurve { P0=curve.P0, P1=curve.P1, P2=curve.P2, P3=curve.P3};
+            BezierCurve managedCurve = new BezierCurve { P0 = curve.P0, P1 = curve.P1, P2 = curve.P2, P3 = curve.P3 };
             return CurveUtilityInternal.EvaluateUpVector(managedCurve, curveT, startUp, endUp);
         }
 
-         /// <summary>Evaluates position, tangent, and up vector efficiently.</summary>
-        public void Evaluate(int splineIndex, float splineT, out float3 position, out float3 tangent, out float3 upVector)
+        /// <summary>Evaluates position, tangent, and up vector efficiently.</summary>
+        public void Evaluate(int splineIndex, float splineT, out float3 position, out float3 tangent,
+            out float3 upVector)
         {
-             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-              if (meta.KnotCount == 0)
-             {
-                 position = float3.zero; tangent = new float3(0, 0, 1); upVector = new float3(0, 1, 0); return;
-             }
-             if (meta.KnotCount == 1)
-             {
-                  BlobBezierKnot knot = GetKnot(splineIndex, 0);
-                 position = knot.Position; tangent = math.rotate(knot.Rotation, new float3(0, 0, 1)); upVector = math.rotate(knot.Rotation, new float3(0, 1, 0)); return;
-             }
+            ref readonly var meta = ref GetSplineMetadata(splineIndex);
+            if (meta.KnotCount == 0)
+            {
+                position = float3.zero;
+                tangent = new float3(0, 0, 1);
+                upVector = new float3(0, 1, 0);
+                return;
+            }
+
+            if (meta.KnotCount == 1)
+            {
+                BlobBezierKnot knot = GetKnot(splineIndex, 0);
+                position = knot.Position;
+                tangent = math.rotate(knot.Rotation, new float3(0, 0, 1));
+                upVector = math.rotate(knot.Rotation, new float3(0, 1, 0));
+                return;
+            }
 
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
@@ -277,7 +285,7 @@ namespace ECSSplines.Runtime
             upVector = EvaluateUpVector(splineIndex, splineT);
         }
 
-        
+
         private static float3 EvaluatePositionInternal(BlobBezierCurve curve, float t)
         {
             t = math.clamp(t, 0, 1);
@@ -289,26 +297,27 @@ namespace ECSSplines.Runtime
 
         private static float3 EvaluateTangentInternal(BlobBezierCurve curve, float t)
         {
-             t = math.clamp(t, 0, 1);
-             float mt = 1.0f - t;
-             return (3f * mt * mt * (curve.P1 - curve.P0)) + (6f * mt * t * (curve.P2 - curve.P1)) + (3f * t * t * (curve.P3 - curve.P2));
+            t = math.clamp(t, 0, 1);
+            float mt = 1.0f - t;
+            return (3f * mt * mt * (curve.P1 - curve.P0)) + (6f * mt * t * (curve.P2 - curve.P1)) +
+                   (3f * t * t * (curve.P3 - curve.P2));
         }
 
         /// <summary>Gets the number of knot link groups stored in the blob.</summary>
-         public int LinkGroupCount => LinkGroupMetadatas.Length;
+        public int LinkGroupCount => LinkGroupMetadatas.Length;
 
-         /// <summary>Gets the metadata for a specific link group.</summary>
-         public ref readonly LinkGroupMetadataInBlob GetLinkGroupMetadata(int groupIndex)
-         {
-             return ref LinkGroupMetadatas[groupIndex];
-         }
+        /// <summary>Gets the metadata for a specific link group.</summary>
+        public ref readonly LinkGroupMetadataInBlob GetLinkGroupMetadata(int groupIndex)
+        {
+            return ref LinkGroupMetadatas[groupIndex];
+        }
 
-         /// <summary>Gets a specific link from the flattened link array using group metadata.</summary>
-         public BlobSplineKnotIndex GetLink(int groupIndex, int linkIndexInGroup)
-         {
-             ref readonly var groupMeta = ref GetLinkGroupMetadata(groupIndex);
-             if (linkIndexInGroup < 0 || linkIndexInGroup >= groupMeta.LinkCount) return default;
-             return AllLinks[groupMeta.LinkStartIndex + linkIndexInGroup];
-         }
+        /// <summary>Gets a specific link from the flattened link array using group metadata.</summary>
+        public BlobSplineKnotIndex GetLink(int groupIndex, int linkIndexInGroup)
+        {
+            ref readonly var groupMeta = ref GetLinkGroupMetadata(groupIndex);
+            if (linkIndexInGroup < 0 || linkIndexInGroup >= groupMeta.LinkCount) return default;
+            return AllLinks[groupMeta.LinkStartIndex + linkIndexInGroup];
+        }
     }
 }

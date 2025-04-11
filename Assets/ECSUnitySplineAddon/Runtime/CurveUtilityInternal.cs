@@ -3,7 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace ECSUnitySplineAddon.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime
 {
     /// <summary>
     /// Exposing CurveUtility internal Methods.
@@ -29,7 +29,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
             return math.abs(b - a) < math.max(0.000001f * math.max(math.abs(a), math.abs(b)), k_Epsilon * 8);
         }
 
-        internal static float3 GetExplicitLinearTangent(float3 point, float3 to)
+        private static float3 GetExplicitLinearTangent(float3 point, float3 to)
         {
             return (to - point) / 3.0f;
         }

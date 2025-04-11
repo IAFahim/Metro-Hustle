@@ -1,10 +1,9 @@
-﻿using Unity.Collections;
-using Unity.Entities;
+﻿using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace ECSSplines.Runtime
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     /// <summary>
     /// MonoBehaviour component to trigger the baking of an entire SplineContainer
@@ -15,10 +14,12 @@ namespace ECSSplines.Runtime
     [DisallowMultipleComponent]
     public class SplineContainerAuthoring : MonoBehaviour
     {
-        [Tooltip("If true, pre-calculates and caches up-vectors in the Blob Asset for faster runtime lookup. Increases bake time and blob size.")]
+        [Tooltip(
+            "If true, pre-calculates and caches up-vectors in the Blob Asset for faster runtime lookup. Increases bake time and blob size.")]
         public bool cacheUpVectors = true;
 
-        [Tooltip("Determines the space the spline geometry is baked in. Local is usually more flexible for moving objects.")]
+        [Tooltip(
+            "Determines the space the spline geometry is baked in. Local is usually more flexible for moving objects.")]
         public SpaceBakingMode bakingSpace = SpaceBakingMode.LocalSpace;
 
         public enum SpaceBakingMode
@@ -35,20 +36,28 @@ namespace ECSSplines.Runtime
 
                 if (splineContainer == null || splineContainer.Splines == null || splineContainer.Splines.Count == 0)
                 {
-                    Debug.LogWarning($"SplineContainerAuthoring on GameObject '{authoring.name}' has no SplineContainer or splines to bake.", authoring);
+                    Debug.LogWarning(
+                        $"SplineContainerAuthoring on GameObject '{authoring.name}' has no SplineContainer or splines to bake.",
+                        authoring);
                     return;
                 }
 
                 bool hasValidSpline = false;
-                foreach(var spline in splineContainer.Splines) {
-                    if (spline != null && spline.Count >= 2) {
+                foreach (var spline in splineContainer.Splines)
+                {
+                    if (spline != null && spline.Count >= 2)
+                    {
                         hasValidSpline = true;
                         break;
                     }
                 }
-                if (!hasValidSpline) {
-                     Debug.LogWarning($"SplineContainerAuthoring on GameObject '{authoring.name}' contains no splines with at least 2 knots.", authoring);
-                     return;
+
+                if (!hasValidSpline)
+                {
+                    Debug.LogWarning(
+                        $"SplineContainerAuthoring on GameObject '{authoring.name}' contains no splines with at least 2 knots.",
+                        authoring);
+                    return;
                 }
 
 
@@ -65,14 +74,17 @@ namespace ECSSplines.Runtime
                 }
                 catch (System.Exception e)
                 {
-                    Debug.LogError($"Error baking spline container '{authoring.name}': {e.Message}\n{e.StackTrace}", authoring);
+                    Debug.LogError($"Error baking spline container '{authoring.name}': {e.Message}\n{e.StackTrace}",
+                        authoring);
                     return;
                 }
 
                 if (!blobRef.IsCreated)
                 {
-                     Debug.LogError($"Failed to create spline container blob for '{authoring.name}'. Check previous warnings.", authoring);
-                     return;
+                    Debug.LogError(
+                        $"Failed to create spline container blob for '{authoring.name}'. Check previous warnings.",
+                        authoring);
+                    return;
                 }
 
                 var transformUsage = authoring.bakingSpace == SpaceBakingMode.LocalSpace

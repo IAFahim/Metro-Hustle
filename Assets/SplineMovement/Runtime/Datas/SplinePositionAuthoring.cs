@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace ECSSplines.Runtime
+namespace SplineMovement.Runtime.Datas
 {
     /// <summary>
     /// Authoring component to define an entity's starting position and behaviour
