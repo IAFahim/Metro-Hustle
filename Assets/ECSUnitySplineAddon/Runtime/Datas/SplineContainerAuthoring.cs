@@ -63,7 +63,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
 
                 float4x4 bakingTransform = authoring.bakingSpace == SpaceBakingMode.LocalSpace
                     ? float4x4.identity
-                    : (float4x4)authoring.transform.localToWorldMatrix;
+                    : authoring.transform.localToWorldMatrix;
 
                 BlobAssetReference<NativeSplineContainerBlob> blobRef = default;
                 try

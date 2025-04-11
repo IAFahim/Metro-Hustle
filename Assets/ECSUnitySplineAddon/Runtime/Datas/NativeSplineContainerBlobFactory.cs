@@ -59,8 +59,8 @@ namespace ECSUnitySplineAddon.Runtime.Datas
 
             BlobBuilderArray<SplineMetadataInBlob> splineMetaBuilder =
                 builder.Allocate(ref root.SplineMetadatas, numValidSplines);
-            BlobBuilderArray<BlobBezierKnot> knotsBuilder = builder.Allocate(ref root.AllKnots, totalKnots);
-            BlobBuilderArray<BlobBezierCurve> curvesBuilder = builder.Allocate(ref root.AllCurves, totalCurves);
+            BlobBuilderArray<BezierKnot> knotsBuilder = builder.Allocate(ref root.AllKnots, totalKnots);
+            BlobBuilderArray<BezierCurve> curvesBuilder = builder.Allocate(ref root.AllCurves, totalCurves);
             BlobBuilderArray<DistanceToInterpolation> distLutBuilder =
                 builder.Allocate(ref root.DistanceLUT, totalCurves * LUT_RESOLUTION);
             BlobBuilderArray<float3> upVecLutBuilder = cacheUpVectors
@@ -96,7 +96,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
                 for (int k = 0; k < knotCount; ++k)
                 {
                     BezierKnot sourceKnot = nativeSpline.Knots[k];
-                    knotsBuilder[currentKnotOffset + k] = new BlobBezierKnot
+                    knotsBuilder[currentKnotOffset + k] = new BezierKnot
                     {
                         Position = sourceKnot.Position,
                         TangentIn = sourceKnot.TangentIn,
@@ -108,7 +108,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
                 for (int c = 0; c < curveCount; ++c)
                 {
                     BezierCurve curve = nativeSpline.Curves[c];
-                    curvesBuilder[currentCurveOffset + c] = new BlobBezierCurve
+                    curvesBuilder[currentCurveOffset + c] = new BezierCurve
                         { P0 = curve.P0, P1 = curve.P1, P2 = curve.P2, P3 = curve.P3 };
 
 
