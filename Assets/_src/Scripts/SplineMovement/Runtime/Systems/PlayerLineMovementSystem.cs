@@ -1,5 +1,4 @@
-﻿using _src.Scripts.Player_Line_Movement.Runtime.Systems;
-using BovineLabs.Core.Input;
+﻿using BovineLabs.Core.Input;
 using ECS_Spline.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
