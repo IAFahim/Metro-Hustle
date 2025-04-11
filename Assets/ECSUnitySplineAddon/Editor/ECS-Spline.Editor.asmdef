@@ -8,7 +8,7 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "ECS-Spline.Runtime"
+        "ECSUnitySplineAddon.Runtime"
     ],
     "includePlatforms": [
         "Editor"

@@ -1,5 +1,5 @@
 {
-    "name": "PlayerLineMovement.Runtime",
+    "name": "SplineMovement.Runtime",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",
@@ -13,7 +13,7 @@
         "MainPlayerMaker.Runtime",
         "Speeds.Runtime.Datas",
         "InputProvider",
-        "ECS-Spline.Runtime",
+        "ECSUnitySplineAddon.Runtime",
         "Unity.Splines"
     ],
     "includePlatforms": [],

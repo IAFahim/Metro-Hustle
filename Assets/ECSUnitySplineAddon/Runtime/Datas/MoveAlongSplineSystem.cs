@@ -1,9 +1,10 @@
-﻿using Unity.Burst;
+﻿using ECS_Spline.Runtime.Datas;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace ECS_Spline.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     [BurstCompile]
     public partial struct MoveAlongSplineSystem : ISystem

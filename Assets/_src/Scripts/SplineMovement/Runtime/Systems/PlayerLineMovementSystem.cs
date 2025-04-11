@@ -1,10 +1,11 @@
-﻿using BovineLabs.Core.Input;
+﻿using _src.Scripts.Player_Line_Movement.Runtime.Systems;
+using BovineLabs.Core.Input;
 using ECS_Spline.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 
-namespace _src.Scripts.Player_Line_Movement.Runtime.Systems
+namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
     [BurstCompile]
     public partial struct PlayerLineMovementSystem : ISystem

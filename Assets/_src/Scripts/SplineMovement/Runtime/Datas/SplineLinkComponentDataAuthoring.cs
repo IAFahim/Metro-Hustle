@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-namespace _src.Scripts.Player_Line_Movement.Runtime.Datas
+namespace _src.Scripts.SplineMovement.Runtime.Datas
 {
     public class SplineLinkComponentDataAuthoring : MonoBehaviour
     {

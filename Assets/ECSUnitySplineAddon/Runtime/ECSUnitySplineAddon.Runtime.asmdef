@@ -1,5 +1,5 @@
 {
-    "name": "PlayerLineMovement.Editor",
+    "name": "ECSUnitySplineAddon.Runtime",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",
@@ -8,16 +8,14 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "PlayerLineMovement.Runtime"
+        "Unity.Splines"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

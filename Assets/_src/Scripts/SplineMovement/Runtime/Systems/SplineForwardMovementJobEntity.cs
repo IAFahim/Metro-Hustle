@@ -1,12 +1,12 @@
-﻿using _src.Scripts.Player_Line_Movement.Runtime.Datas;
-using _src.Scripts.Speeds.Runtime.Datas;
+﻿using _src.Scripts.Speeds.Runtime.Datas;
+using _src.Scripts.SplineMovement.Runtime.Datas;
 using ECS_Spline.Runtime.Datas;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine.Splines;
 
-namespace _src.Scripts.Player_Line_Movement.Runtime.Systems
+namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
     public partial struct SplineForwardMovementJobEntity : IJobEntity
     {
