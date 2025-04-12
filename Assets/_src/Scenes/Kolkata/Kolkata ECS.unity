@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 1213920800}
   - component: {fileID: 1213920801}
   - component: {fileID: 1213920802}
+  - component: {fileID: 1213920803}
+  - component: {fileID: 1213920804}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -159,7 +161,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213920799}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31a1f95b0467470aaa99d3d4eeb30226, type: 3}
   m_Name: 
@@ -172,7 +174,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213920799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e1c6100d754e92b8ead7dc9d21d996, type: 3}
   m_Name: 
@@ -182,6 +184,35 @@ MonoBehaviour:
   InitialNormalizedTime: 0
   Speed: 1000
   Offset: {x: 0, y: 0, z: 0}
+--- !u!114 &1213920803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213920799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c33c946bfc54930aff5e535a1ba5bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineIndex: 0
+  knotIndex: 0
+  progress: 0
+--- !u!114 &1213920804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213920799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 443b4bde648942a3bd36e89f8972a444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  multiplier: 1
 --- !u!1 &1741924224
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +224,7 @@ GameObject:
   - component: {fileID: 1741924226}
   - component: {fileID: 1741924225}
   - component: {fileID: 1741924228}
+  - component: {fileID: 1741924229}
   m_Layer: 0
   m_Name: Barangar Spline
   m_TagString: Untagged
@@ -759,13 +791,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741924224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 201754c47e794a4ca31c29d51922d900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cacheUpVectors: 1
   bakingSpace: 1
+--- !u!114 &1741924229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741924224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679b3f2d33054e8990e09fd102fa8818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheUpVectors: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

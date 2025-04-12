@@ -1,5 +1,5 @@
 {
-    "name": "ECSUnitySplineAddon.Runtime",
+    "name": "ECS-Spline.Runtime",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",

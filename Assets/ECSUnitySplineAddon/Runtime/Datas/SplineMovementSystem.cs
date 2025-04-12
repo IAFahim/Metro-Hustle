@@ -1,11 +1,10 @@
-﻿using ECSUnitySplineAddon.Runtime.Datas;
-using SplineMovement.Runtime.Datas;
+﻿using ECSSplines.Runtime;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace SplineMovement.Runtime.Systems
+namespace ECS_Spline.Runtime.Datas
 {
     [BurstCompile]
     [UpdateInGroup(typeof(SimulationSystemGroup))]
@@ -54,10 +53,13 @@ namespace SplineMovement.Runtime.Systems
 
                     if (meta.Closed)
                     {
-                        currentNormalizedT %= 1.0f;
+                        currentNormalizedT = currentNormalizedT % 1.0f;
                         if (currentNormalizedT < 0) currentNormalizedT += 1.0f;
                     }
-                    else currentNormalizedT = math.clamp(currentNormalizedT, 0f, 1f);
+                    else
+                    {
+                        currentNormalizedT = math.clamp(currentNormalizedT, 0f, 1f);
+                    }
                 }
                 else currentNormalizedT = 0f;
 
