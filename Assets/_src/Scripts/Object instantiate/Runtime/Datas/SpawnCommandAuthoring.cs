@@ -1,6 +1,5 @@
 ﻿using BovineLabs.Core.Authoring.ObjectManagement;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace _src.Scripts.Object_instantiate.Runtime.Datas
