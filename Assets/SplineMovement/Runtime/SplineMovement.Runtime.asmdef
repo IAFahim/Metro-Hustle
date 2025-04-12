@@ -14,7 +14,8 @@
         "Speeds.Runtime",
         "InputProvider",
         "ECSUnitySplineAddon.Runtime",
-        "Unity.Splines"
+        "Unity.Splines",
+        "ECS-Spline.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

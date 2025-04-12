@@ -5,7 +5,7 @@ namespace _src.Scripts.Speeds.Runtime.Datas
 {
     public class SpeedComponentDataAuthoring : MonoBehaviour
     {
-        public float speed = 0.001f;
+        public float speed = 0.1f;
         public float multiplier = 1;
 
         public class SpeedComponentDataBaker : Baker<SpeedComponentDataAuthoring>
