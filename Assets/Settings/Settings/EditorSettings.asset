@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edbd0fa5e59a9344a83df1b3177d250, type: 3}
   m_Name: EditorSettings
   m_EditorClassIdentifier: 
-  prebakeScenes: []
   paths:
   - Key: settings
     Path: Assets/Settings/Settings
@@ -22,6 +21,16 @@ MonoBehaviour:
     Path: Assets/Settings/Definitions
   - Key: object.groups
     Path: Assets/Settings/Groups
+  - Key: bl.subscene-set
+    Path: Assets/Settings/Scenes/
+  - Key: bl.subscene-editor-set
+    Path: Assets/Settings/Scenes/Editor
+  - Key: bl.subscene-asset-set
+    Path: Assets/Settings/Scenes/Assets
+  - Key: definitions
+    Path: Assets/Settings/Definitions
+  prebakeScenes: []
+  startupScene: {fileID: 0}
   defaultSettingsAuthoring: {fileID: 0}
   settingAuthoring:
   - World: service

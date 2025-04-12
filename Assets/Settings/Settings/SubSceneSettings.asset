@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c096152d7adf411eada8f0658172fa26, type: 3}
   m_Name: SubSceneSettings
   m_EditorClassIdentifier: 
-  SceneSets: []
-  EditorSceneSets: []
+  SceneSets:
+  - {fileID: 11400000, guid: bb5b451007a245b488bf1bca868e54a6, type: 2}
+  - {fileID: 11400000, guid: 28126daff98b83c41b802466bac62743, type: 2}
+  EditorSceneSets:
+  - {fileID: 11400000, guid: d0019141a15a1ba438821e54204c5a4f, type: 2}
+  AssetSets: []

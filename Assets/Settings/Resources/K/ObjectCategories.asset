@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: ObjectCategories
   m_EditorClassIdentifier: 
   description: 
-  keys: []
+  keys:
+  - name: obstacles
+    value: 0
+    component: 520126847680759765

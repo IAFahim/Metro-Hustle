@@ -11,7 +11,7 @@
         "BovineLabs.Core",
         "BovineLabs.Core.Extensions",
         "MainPlayerMaker.Runtime",
-        "Speeds.Runtime.Datas",
+        "Speeds.Runtime",
         "InputProvider",
         "ECSUnitySplineAddon.Runtime",
         "Unity.Splines"

@@ -1,6 +1,0 @@
-﻿{
-  "name": "unity.util.Parser.Editor",
-  "includePlatforms": [
-    "Editor"
-  ]
-}
