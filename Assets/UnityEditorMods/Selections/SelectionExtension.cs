@@ -2,15 +2,15 @@
 using System.IO;
 using UnityEditor;
 
-namespace UnityEditorMod.Selections
+namespace UnityEditorMods.Selections
 {
-    internal class SelectionExtension
+    public static class SelectionExtension
     {
         private const string AssetsRootPath = "Assets";
-        
+
         public static string GetFolder()
         {
-            Object[] selectedObjects = Selection.GetFiltered(typeof(Object), SelectionMode.Assets);
+            UnityEngine.Object[] selectedObjects = Selection.GetFiltered(typeof(Object), SelectionMode.Assets);
             if ((selectedObjects?.Length ?? 0) > 0)
             {
                 string folderPath = AssetDatabase.GetAssetPath((UnityEngine.Object)selectedObjects[0]);
@@ -18,6 +18,16 @@ namespace UnityEditorMod.Selections
             }
 
             return AssetsRootPath;
+        }
+
+        public static string CreateAsset(UnityEngine.Object asset, string fileName)
+        {
+            var path = GetFolder();
+            var assetPath = Path.Combine(path, fileName);
+            AssetDatabase.CreateAsset(asset, assetPath);
+            AssetDatabase.SaveAssets();
+            Selection.activeObject = asset;
+            return assetPath;
         }
     }
 }

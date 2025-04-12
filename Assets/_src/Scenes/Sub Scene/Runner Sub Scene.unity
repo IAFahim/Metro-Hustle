@@ -174,7 +174,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460723440}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 443b4bde648942a3bd36e89f8972a444, type: 3}
   m_Name: 
@@ -208,10 +208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e1c6100d754e92b8ead7dc9d21d996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetSplineIndex: 1
-  InitialNormalizedTime: 1
-  Speed: -34.4
-  Offset: {x: 0, y: 0, z: -5.88}
+  TargetSplineIndex: 0
+  knot: 0
+  InitialNormalizedTime: 0
+  Speed: 10
+  Offset: {x: 0, y: 0, z: 0}
 --- !u!1 &508957138
 GameObject:
   m_ObjectHideFlags: 0

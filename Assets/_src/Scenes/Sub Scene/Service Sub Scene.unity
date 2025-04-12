@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 2076846501}
   - component: {fileID: 2076846502}
   m_Layer: 0
-  m_Name: GameObject_2
+  m_Name: Sub Scene Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

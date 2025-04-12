@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.bovinelabs.anchor": {
+      "version": "https://gitlab.com/tertle/com.bovinelabs.anchor.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.dt.app-ui": "2.0.0-pre.18"
+      },
+      "hash": "6bab10f23c19d9dc12fb8bcab60bb8b2d2d6794f"
+    },
     "com.bovinelabs.core": {
       "version": "https://github.com/IAFahim/com.bovinelabs.core.git",
       "depth": 0,

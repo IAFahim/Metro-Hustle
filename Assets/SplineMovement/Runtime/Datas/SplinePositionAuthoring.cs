@@ -11,8 +11,9 @@ namespace SplineMovement.Runtime.Datas
     [DisallowMultipleComponent]
     public class SplinePositionAuthoring : MonoBehaviour
     {
-        [Header("Spline Reference")] [Tooltip("The zero-based index of the spline within the target container to follow.")]
+        [Tooltip("The zero-based index of the spline within the target container to follow.")]
         public int TargetSplineIndex = 0;
+        public int knot = 0;
 
         [Header("Initial State")]
         [Tooltip("Starting progress along the spline, normalized (0 = start, 1 = end).")]

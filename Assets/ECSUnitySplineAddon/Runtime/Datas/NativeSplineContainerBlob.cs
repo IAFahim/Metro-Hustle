@@ -1,5 +1,4 @@
 ﻿using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -141,8 +140,10 @@ namespace ECSUnitySplineAddon.Runtime.Datas
                 if (targetDistance <= nextAccumulatedDistance + 0.0001f)
                 {
                     float distanceIntoCurve = targetDistance - accumulatedDistance;
-                    curveT = GetCurveInterpolationFromDistance(splineIndex, curveIdxInSpline, distanceIntoCurve,
-                        currentCurveLength);
+                    GetCurveInterpolationFromDistance(
+                        splineIndex, curveIdxInSpline, distanceIntoCurve, currentCurveLength,
+                        out curveT
+                    );
                     return curveIdxInSpline;
                 }
 
@@ -160,20 +161,21 @@ namespace ECSUnitySplineAddon.Runtime.Datas
         /// <param name="curveIndexInSpline">The index of the curve within that specific spline.</param>
         /// <param name="distanceInCurve">The distance along the curve.</param>
         /// <param name="curveLength">The total length of the curve (passed in for potential optimization).</param>
-        /// <returns>The normalized interpolation factor (0-1) along the curve.</returns>
-        private float GetCurveInterpolationFromDistance(int splineIndex, int curveIndexInSpline, float distanceInCurve,
-            float curveLength)
+        /// <param name="interpolationNormal">The normalized interpolation factor (0-1) along the curve.</param>
+        [BurstCompile]
+        private void GetCurveInterpolationFromDistance(int splineIndex, int curveIndexInSpline, float distanceInCurve,
+            float curveLength, out float interpolationNormal)
         {
-            if (distanceInCurve <= 0.0001f) return 0f;
-            if (distanceInCurve >= curveLength - 0.0001f) return 1f;
+            if (distanceInCurve <= 0.0001f) interpolationNormal = 0f;
+            if (distanceInCurve >= curveLength - 0.0001f) interpolationNormal = 1f;
 
             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-            if (meta.DistLutStartIndex < 0 || DistanceLutResolution <= 1) return 0f;
+            if (meta.DistLutStartIndex < 0 || DistanceLutResolution <= 1) interpolationNormal = 0f;
 
             int lutStartIndex = meta.DistLutStartIndex + curveIndexInSpline * DistanceLutResolution;
             int lutEndIndex = lutStartIndex + DistanceLutResolution - 1;
 
-            if (lutStartIndex < 0 || lutEndIndex >= DistanceLUT.Length) return 0f;
+            if (lutStartIndex < 0 || lutEndIndex >= DistanceLUT.Length) interpolationNormal = 0f;
 
             for (int i = 0; i < DistanceLutResolution - 1; ++i)
             {
@@ -184,44 +186,46 @@ namespace ECSUnitySplineAddon.Runtime.Datas
                 if (distanceInCurve >= prev.Distance && distanceInCurve <= next.Distance)
                 {
                     float segmentLength = next.Distance - prev.Distance;
-                    if (segmentLength <= 0.00001f) return prev.T;
+                    if (segmentLength <= 0.00001f) interpolationNormal = prev.T;
 
                     float lerpFactor = (distanceInCurve - prev.Distance) / segmentLength;
-                    return math.lerp(prev.T, next.T, lerpFactor);
+                    interpolationNormal = math.lerp(prev.T, next.T, lerpFactor);
                 }
             }
 
-            return DistanceLUT[lutEndIndex].T;
+            interpolationNormal = DistanceLUT[lutEndIndex].T;
         }
 
 
         /// <summary>Evaluates the position on a specific spline at a normalized spline time t (0-1).</summary>
         /// <param name="splineIndex">The index of the spline (relative to this blob).</param>
         /// <param name="splineT">The normalized time (0-1) along the entire spline.</param>
-        /// <returns>The calculated position in the space the spline was baked in (local or world).</returns>
-        public float3 EvaluatePosition(int splineIndex, float splineT)
+        /// <param name="position">The calculated position in the space the spline was baked in (local or world).</param>
+        [BurstCompile]
+        public void EvaluatePosition(int splineIndex, float splineT, out float3 position)
         {
             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-            if (meta.KnotCount == 0) return float3.zero;
-            if (meta.KnotCount == 1) return GetKnot(splineIndex, 0).Position;
+            if (meta.KnotCount == 0) position = float3.zero;
+            if (meta.KnotCount == 1) position = GetKnot(splineIndex, 0).Position;
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
             BezierCurve curve = GetCurve(splineIndex, curveIdx);
-            return EvaluatePositionInternal(curve, curveT);
+            EvaluatePositionInternal(curve, curveT, out position);
         }
 
         /// <summary>Evaluates the tangent (first derivative) on a specific spline at a normalized spline time t (0-1).</summary>
         /// <param name="splineIndex">The index of the spline (relative to this blob).</param>
         /// <param name="splineT">The normalized time (0-1) along the entire spline.</param>
-        /// <returns>The calculated tangent vector (not normalized). Represents direction and speed.</returns>
-        public float3 EvaluateTangent(int splineIndex, float splineT)
+        /// <param name="tangentNoNormal">The calculated tangent vector (not normalized). Represents direction and speed.</param>
+        [BurstCompile]
+        public void EvaluateTangent(int splineIndex, float splineT, out float3 tangentNoNormal)
         {
             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-            if (meta.KnotCount < 2) return new float3(0, 0, 1);
+            if (meta.KnotCount < 2) tangentNoNormal = new float3(0, 0, 1);
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
             BezierCurve curve = GetCurve(splineIndex, curveIdx);
-            return EvaluateTangentInternal(curve, curveT);
+            EvaluateTangentInternal(curve, curveT, out tangentNoNormal);
         }
 
         /// <summary>Evaluates the up-vector on a specific spline at a normalized spline time t (0-1).</summary>
@@ -231,13 +235,14 @@ namespace ECSUnitySplineAddon.Runtime.Datas
         /// </remarks>
         /// <param name="splineIndex">The index of the spline (relative to this blob).</param>
         /// <param name="splineT">The normalized time (0-1) along the entire spline.</param>
-        /// <returns>The calculated up-vector (normalized).</returns>
-        public float3 EvaluateUpVector(int splineIndex, float splineT)
+        /// <param name="upVector">The calculated up-vector (normalized).</param>
+        [BurstCompile]
+        public void EvaluateUpVector(int splineIndex, float splineT, out float3 upVector)
         {
             ref readonly var meta = ref GetSplineMetadata(splineIndex);
-            if (meta.KnotCount == 0) return math.up();
-            if (meta.KnotCount == 1) return math.rotate(GetKnot(splineIndex, 0).Rotation, math.up());
-            if (meta.CurveCount == 0) return math.up();
+            if (meta.KnotCount == 0) upVector = math.up();
+            if (meta.KnotCount == 1) upVector = math.rotate(GetKnot(splineIndex, 0).Rotation, math.up());
+            if (meta.CurveCount == 0) upVector = math.up();
 
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
 
@@ -263,7 +268,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
 
                 if (globalIndex0 >= 0 && globalIndex1 < UpVectorLUT.Length)
                 {
-                    return math.normalizesafe(
+                    upVector = math.normalizesafe(
                         Vector3.Slerp(UpVectorLUT[globalIndex0], UpVectorLUT[globalIndex1], lerpFactor), math.up());
                 }
             }
@@ -279,7 +284,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
             float3 startUp = math.rotate(knotStart.Rotation, math.up());
             float3 endUp = math.rotate(knotEnd.Rotation, math.up());
 
-            return CurveUtilityInternal.EvaluateUpVector(curve, curveT, startUp, endUp);
+            upVector = CurveUtilityInternal.EvaluateUpVector(curve, curveT, startUp, endUp);
         }
 
         /// <summary>
@@ -292,6 +297,7 @@ namespace ECSUnitySplineAddon.Runtime.Datas
         /// <param name="position">Outputs the calculated position.</param>
         /// <param name="tangent">Outputs the calculated tangent (unnormalized).</param>
         /// <param name="upVector">Outputs the calculated up-vector (normalized).</param>
+        [BurstCompile]
         public void Evaluate(int splineIndex, float splineT, out float3 position, out float3 tangent,
             out float3 upVector)
         {
@@ -326,8 +332,8 @@ namespace ECSUnitySplineAddon.Runtime.Datas
             int curveIdx = SplineToCurveT(splineIndex, splineT, out float curveT);
             BezierCurve curve = GetCurve(splineIndex, curveIdx);
 
-            position = EvaluatePositionInternal(curve, curveT);
-            tangent = EvaluateTangentInternal(curve, curveT);
+            EvaluatePositionInternal(curve, curveT, out position);
+            EvaluateTangentInternal(curve, curveT, out tangent);
 
             bool canUseLut = meta.UpVectorLutStartIndex >= 0 &&
                              UpVectorLUT.Length > 0 &&
@@ -367,27 +373,32 @@ namespace ECSUnitySplineAddon.Runtime.Datas
         /// <summary>Internal helper to evaluate position on a single Bezier curve.</summary>
         /// <param name="curve">The Bezier curve data.</param>
         /// <param name="t">Normalized time (0-1) along this curve.</param>
-        /// <returns>Position on the curve.</returns>
-        private static float3 EvaluatePositionInternal(in BezierCurve curve, float t)
+        /// <param name="positionInCurve">Position on the curve.</param>
+        [BurstCompile]
+        private static void EvaluatePositionInternal(in BezierCurve curve, float t, out float3 positionInCurve)
         {
             t = math.clamp(t, 0f, 1f);
             float mt = 1f - t;
             float mt2 = mt * mt;
             float t2 = t * t;
-            return (mt2 * mt * curve.P0) + (3f * mt2 * t * curve.P1) + (3f * mt * t2 * curve.P2) + (t2 * t * curve.P3);
+            positionInCurve = (mt2 * mt * curve.P0) +
+                              (3f * mt2 * t * curve.P1) +
+                              (3f * mt * t2 * curve.P2) +
+                              (t2 * t * curve.P3);
         }
 
         /// <summary>Internal helper to evaluate tangent on a single Bezier curve.</summary>
         /// <param name="curve">The Bezier curve data.</param>
         /// <param name="t">Normalized time (0-1) along this curve.</param>
-        /// <returns>Tangent vector (unnormalized).</returns>
-        private static float3 EvaluateTangentInternal(in BezierCurve curve, float t)
+        /// <param name="tangent">Tangent vector (unnormalized).</param>
+        [BurstCompile]
+        private static void EvaluateTangentInternal(in BezierCurve curve, float t, out float3 tangent)
         {
             t = math.clamp(t, 0f, 1f);
             float mt = 1.0f - t;
-            return (3f * mt * mt * (curve.P1 - curve.P0)) +
-                   (6f * mt * t * (curve.P2 - curve.P1)) +
-                   (3f * t * t * (curve.P3 - curve.P2));
+            tangent = (3f * mt * mt * (curve.P1 - curve.P0)) +
+                      (6f * mt * t * (curve.P2 - curve.P1)) +
+                      (3f * t * t * (curve.P3 - curve.P2));
         }
 
         #region Knot Link Accessors

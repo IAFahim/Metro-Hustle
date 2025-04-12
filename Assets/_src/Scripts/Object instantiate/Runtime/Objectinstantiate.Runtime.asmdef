@@ -1,0 +1,25 @@
+{
+    "name": "Objectinstantiate.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Entities",
+        "Unity.Transforms",
+        "Unity.Entities.Hybrid",
+        "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Mathematics",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Authoring",
+        "BovineLabs.Core.Extensions",
+        "BovineLabs.Core.Extensions.Authoring"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

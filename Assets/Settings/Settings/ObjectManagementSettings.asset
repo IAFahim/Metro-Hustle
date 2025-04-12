@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b91ef1ae8504a268782e34ac6a6cd79, type: 3}
   m_Name: ObjectManagementSettings
   m_EditorClassIdentifier: 
-  objectDefinitions: []
-  objectGroups: []
+  objectDefinitions:
+  - {fileID: 11400000, guid: c1637b8ca9c56d842bec112316e4032d, type: 2}
+  objectGroups:
+  - {fileID: 11400000, guid: 4d4ac0076a4442941b6d18890c71e920, type: 2}
