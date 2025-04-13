@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-namespace ECS_Spline.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     public struct NativeSplineBlobComponentData : IComponentData
     {

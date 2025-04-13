@@ -2,7 +2,7 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace _Root.Scripts.MainInputProviders.Runtime
+namespace _src.Scripts.PlayerInputs.Runtime
 {
     public class InputPermissionSingletonComponentDataAuthoring : MonoBehaviour
     {

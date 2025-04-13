@@ -1,8 +1,7 @@
 ﻿using BovineLabs.Core.ObjectManagement;
 using Unity.Entities;
-using Unity.Mathematics;
 
-namespace _Root.Scripts.MainInputProviders.Runtime
+namespace _src.Scripts.PlayerInputs.Runtime
 {
     public struct InputPermissionSingletonComponentData : IComponentData
     {

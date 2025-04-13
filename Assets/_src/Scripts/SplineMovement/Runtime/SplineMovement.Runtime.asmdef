@@ -1,0 +1,30 @@
+{
+    "name": "SplineMovement.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Entities",
+        "Unity.Transforms",
+        "Unity.Entities.Hybrid",
+        "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Mathematics",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions",
+        "MainPlayerMaker.Runtime",
+        "Speeds.Runtime",
+        "InputProvider",
+        "ECSUnitySplineAddon.Runtime",
+        "Unity.Splines",
+        "ECS-Spline.Runtime",
+        "MovementTarget.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

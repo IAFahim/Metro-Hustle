@@ -1,14 +1,21 @@
-﻿using Unity.Entities;
+﻿using ECS_Spline.Runtime.Datas;
+using Unity.Burst;
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace ECS_Spline.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     /// <summary>
     /// Unmanaged representation of a spline, stored as a Blob Asset for ECS.
     /// Contains pre-calculated curve data and lookup tables for efficient runtime evaluation.
     /// </summary>
+    /// <summary>
+    /// Unmanaged representation of a spline, stored as a Blob Asset for ECS.
+    /// Contains pre-calculated curve data and lookup tables for efficient runtime evaluation.
+    /// </summary>
+    [BurstCompile]
     public struct NativeSplineBlob
     {
         public BlobArray<BezierKnot> Knots;
@@ -88,6 +95,7 @@ namespace ECS_Spline.Runtime.Datas
                     curveT = GetCurveInterpolationFromDistance(i, distanceIntoCurve, lutResolution);
                     return i;
                 }
+
                 accumulatedDistance += currentCurveLength;
             }
 
@@ -100,10 +108,10 @@ namespace ECS_Spline.Runtime.Datas
         /// </summary>
         private float GetCurveInterpolationFromDistance(int curveIndex, float distanceInCurve, int lutResolution)
         {
-             if (distanceInCurve <= 0f) return 0f;
+            if (distanceInCurve <= 0f) return 0f;
 
             int lutStartIndex = curveIndex * lutResolution;
-            int lutEndIndex = lutStartIndex + lutResolution -1;
+            int lutEndIndex = lutStartIndex + lutResolution - 1;
 
             if (distanceInCurve >= DistanceLUT[lutEndIndex].Distance) return 1f;
 
@@ -162,9 +170,9 @@ namespace ECS_Spline.Runtime.Datas
         /// <returns>The up vector on the spline.</returns>
         public float3 EvaluateUpVector(float splineT)
         {
-             if (Knots.Length < 2) return new float3(0, 1, 0);
+            if (Knots.Length < 2) return new float3(0, 1, 0);
 
-             int curveIndex = SplineToCurveT(splineT, out float curveT);
+            int curveIndex = SplineToCurveT(splineT, out float curveT);
 
             if (UpVectorLUT.Length > 0)
             {
@@ -181,13 +189,13 @@ namespace ECS_Spline.Runtime.Datas
                 float3 up1 = UpVectorLUT[lutStartIndex + index1];
 
                 return Vector3.Slerp(up0, up1, lerpFactor);
-
             }
             else
             {
                 BezierCurve curve = Curves[curveIndex];
                 BezierKnot knotStart = Knots[curveIndex];
-                BezierKnot knotEnd = Knots[Closed ? (curveIndex + 1) % Knots.Length : math.min(curveIndex + 1, Knots.Length - 1)];
+                BezierKnot knotEnd =
+                    Knots[Closed ? (curveIndex + 1) % Knots.Length : math.min(curveIndex + 1, Knots.Length - 1)];
 
                 float3 startUp = math.rotate(knotStart.Rotation, math.up());
                 float3 endUp = math.rotate(knotEnd.Rotation, math.up());
@@ -206,24 +214,15 @@ namespace ECS_Spline.Runtime.Datas
         /// <param name="upVector">Output: The up vector on the spline.</param>
         public void Evaluate(float splineT, out float3 position, out float3 tangent, out float3 upVector)
         {
-             if (Knots.Length == 0)
-             {
-                 position = float3.zero;
-                 tangent = new float3(0, 0, 1);
-                 upVector = new float3(0, 1, 0);
-                 return;
-             }
-             if (Knots.Length == 1)
-             {
-                 position = Knots[0].Position;
-                 tangent = math.rotate(Knots[0].Rotation, new float3(0, 0, 1));
-                 upVector = math.rotate(Knots[0].Rotation, new float3(0, 1, 0));
-                 return;
-             }
-
             int curveIndex = SplineToCurveT(splineT, out float curveT);
-            BezierCurve curve = Curves[curveIndex];
+            Evaluate(curveIndex, curveT, out position, out tangent, out upVector);
+        }
 
+        [BurstCompile]
+        public void Evaluate(int curveIndex, float curveT, out float3 position, out float3 tangent,
+            out float3 upVector)
+        {
+            BezierCurve curve = Curves[curveIndex];
             position = CurveUtility.EvaluatePosition(curve, curveT);
             tangent = CurveUtility.EvaluateTangent(curve, curveT);
 
@@ -235,12 +234,14 @@ namespace ECS_Spline.Runtime.Datas
                 int index0 = math.min((int)math.floor(segmentT), lutResolution - 2);
                 int index1 = index0 + 1;
                 float lerpFactor = segmentT - index0;
-                upVector = Vector3.Slerp(UpVectorLUT[lutStartIndex + index0], UpVectorLUT[lutStartIndex + index1], lerpFactor);
+                upVector = Vector3.Slerp(UpVectorLUT[lutStartIndex + index0], UpVectorLUT[lutStartIndex + index1],
+                    lerpFactor);
             }
             else
             {
                 BezierKnot knotStart = Knots[curveIndex];
-                 BezierKnot knotEnd = Knots[Closed ? (curveIndex + 1) % Knots.Length : math.min(curveIndex + 1, Knots.Length - 1)];
+                BezierKnot knotEnd =
+                    Knots[Closed ? (curveIndex + 1) % Knots.Length : math.min(curveIndex + 1, Knots.Length - 1)];
                 float3 startUp = math.rotate(knotStart.Rotation, math.up());
                 float3 endUp = math.rotate(knotEnd.Rotation, math.up());
                 upVector = CurveUtilityInternal.EvaluateUpVector(curve, curveT, startUp, endUp);
