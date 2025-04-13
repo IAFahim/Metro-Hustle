@@ -5,21 +5,21 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public class GroundFloorAuthoring : MonoBehaviour
     {
-        public int[] groundFloorIndexes;
+        public Building[] groundFloors;
+
         public class GroundFloorBaker : Baker<GroundFloorAuthoring>
         {
             public override void Bake(GroundFloorAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 var bufferGroundFloor = AddBuffer<GroundFloor>(entity);
-                foreach (var index in authoring.groundFloorIndexes)
+                foreach (var building in authoring.groundFloors)
                 {
                     bufferGroundFloor.Add(new GroundFloor()
                     {
-                        GroundFloorEntity = index
+                        Prefab = GetEntity(building.prefab, TransformUsageFlags.Renderable)
                     });
                 }
-                
             }
         }
     }
