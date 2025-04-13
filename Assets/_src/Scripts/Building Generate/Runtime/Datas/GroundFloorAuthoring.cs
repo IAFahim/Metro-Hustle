@@ -12,10 +12,10 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
             public override void Bake(GroundFloorAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                var bufferGroundFloor = AddBuffer<GroundFloor>(entity);
+                var bufferGroundFloor = AddBuffer<GroundFloorBuffer>(entity);
                 foreach (var building in authoring.groundFloors)
                 {
-                    bufferGroundFloor.Add(new GroundFloor()
+                    bufferGroundFloor.Add(new GroundFloorBuffer()
                     {
                         Prefab = GetEntity(building.prefab, TransformUsageFlags.Renderable)
                     });

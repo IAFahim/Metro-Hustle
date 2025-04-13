@@ -4,7 +4,7 @@ using Unity.Mathematics;
 namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     [InternalBufferCapacity(16)]
-    public struct GroundFloor : IBufferElementData
+    public struct GroundFloorBuffer : IBufferElementData
     {
         public Entity Prefab;
         public float3 Size;

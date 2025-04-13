@@ -131,6 +131,8 @@ GameObject:
   - component: {fileID: 827580424}
   - component: {fileID: 827580426}
   - component: {fileID: 827580427}
+  - component: {fileID: 827580429}
+  - component: {fileID: 827580428}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -153,9 +155,9 @@ MonoBehaviour:
   groundFloors:
   - prefab: {fileID: 1380771087322941100, guid: 3db534e53780e0d4f9aa885600015663, type: 3}
     size:
-      x: 0
-      y: 0
-      z: 0
+      x: 1
+      y: 1
+      z: 1
 --- !u!4 &827580425
 Transform:
   m_ObjectHideFlags: 0
@@ -197,6 +199,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roofTopIndexes: 000000000300000002000000
+--- !u!114 &827580428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827580423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fabf640d90e4d24a4aa371cec167de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  count: 5
+--- !u!114 &827580429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827580423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82b442ffe004befa8dbe3d258ebd8cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset:
+    x: 0
+    y: 0
+    z: 0
 --- !u!1 &964983361
 GameObject:
   m_ObjectHideFlags: 0

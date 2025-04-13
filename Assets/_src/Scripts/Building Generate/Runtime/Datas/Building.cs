@@ -10,6 +10,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
     {
         [SearchContext("t:Prefab ground floor")]
         public GameObject prefab;
-        public float3 size;
+
+        public float3 size = new(1, 1, 1);
     }
 }
