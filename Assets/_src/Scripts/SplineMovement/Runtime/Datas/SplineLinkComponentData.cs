@@ -7,7 +7,7 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
         public byte SplineIndex;
         public byte CurveIndex;
         public sbyte LineNumber;
-        public float Progress;
+        public float DistancePassedInCurve;
         public float TraveledDistance;
     }
 }

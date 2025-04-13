@@ -22,7 +22,7 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
                     {
                         SplineIndex = authoring.splineIndex,
                         CurveIndex = authoring.curveIndex,
-                        Progress = authoring.progress,
+                        DistancePassedInCurve = authoring.progress,
                         TraveledDistance = authoring.traveledDistance,
                         LineNumber = authoring.lineNumber
                     });
