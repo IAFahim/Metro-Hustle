@@ -7,10 +7,11 @@
         "Unity.Entities.Hybrid",
         "Unity.Burst",
         "Unity.Collections",
-        "Unity.Mathematics"
+        "Unity.Mathematics",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions"
     ],
-    "includePlatforms": [
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

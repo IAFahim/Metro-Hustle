@@ -1,5 +1,4 @@
 ﻿using _src.Scripts.Building_Generate.Runtime.Datas;
-using _src.Scripts.Building_Generate.Runtime.Gen;
 using Unity.Burst;
 using Unity.Entities;
 
@@ -22,7 +21,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
         {
             var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
-            _groundFloorBufferLookup = _groundFloorBufferLookup.Update(ref state);
+            _groundFloorBufferLookup.Update(ref state);
             SpawnAreaIJobEntity spawnAreaIJobEntity = new SpawnAreaIJobEntity
             {
                 GroundFloorBufferLookup = _groundFloorBufferLookup,

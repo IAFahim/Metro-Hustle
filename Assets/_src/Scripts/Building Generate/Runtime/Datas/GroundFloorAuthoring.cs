@@ -1,11 +1,13 @@
 ﻿using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Search;
 
 namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public class GroundFloorAuthoring : MonoBehaviour
     {
-        public Building[] groundFloors;
+        [SearchContext("t:Prefab ground floor")]
+        public GameObject[] groundFloors;
 
         public class GroundFloorBaker : Baker<GroundFloorAuthoring>
         {
@@ -13,11 +15,11 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 var bufferGroundFloor = AddBuffer<GroundFloorBuffer>(entity);
-                foreach (var building in authoring.groundFloors)
+                foreach (var prefab in authoring.groundFloors)
                 {
                     bufferGroundFloor.Add(new GroundFloorBuffer()
                     {
-                        Prefab = GetEntity(building.prefab, TransformUsageFlags.Renderable)
+                        Prefab = GetEntity(prefab, TransformUsageFlags.Renderable)
                     });
                 }
             }

@@ -5,6 +5,6 @@ namespace _src.Scripts.Building_Generate.Runtime.Gen
 {
     public struct AreaSpawnerComponentData : IComponentData
     {
-        public float3 Offset;
+        public float2 Area;
     }
 }

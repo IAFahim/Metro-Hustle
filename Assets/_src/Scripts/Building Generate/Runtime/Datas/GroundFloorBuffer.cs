@@ -7,6 +7,5 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
     public struct GroundFloorBuffer : IBufferElementData
     {
         public Entity Prefab;
-        public float3 Size;
     }
 }

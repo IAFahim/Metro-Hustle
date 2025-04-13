@@ -31,12 +31,9 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
             NativeSplineBlobComponentData splineComp =
                 SystemAPI.GetComponent<NativeSplineBlobComponentData>(splineEntity);
 
-            if (!splineComp.Value.IsCreated) return;
-
             ref var splineBlob = ref splineComp.Value.Value;
 
-            LocalToWorld splineTransform = default;
-            splineTransform = SystemAPI.GetComponent<LocalToWorld>(splineEntity);
+            LocalToWorld splineTransform = SystemAPI.GetComponent<LocalToWorld>(splineEntity);
 
 
             foreach (var (localTransform, splineLink, speedComponentData) in SystemAPI
@@ -47,12 +44,13 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
                 splineLink.ValueRW.DistancePassedInCurve += offsetThisFrame;
                 float normalizedT = splineLink.ValueRO.DistancePassedInCurve / curveLength;
 
-                splineBlob.Evaluate(splineLink.ValueRO.CurveIndex, normalizedT, out float3 localPosition, out float3 localTangent, out float3 localUpVector);
+                splineBlob.Evaluate(splineLink.ValueRO.CurveIndex, normalizedT, out float3 localPosition,
+                    out float3 localTangent, out float3 localUpVector);
 
                 float3 worldPosition = math.transform(splineTransform.Value, localPosition);
                 float3 worldTangent = math.rotate(splineTransform.Value, localTangent);
                 float3 worldUpVector = math.rotate(splineTransform.Value, localUpVector);
-                
+
                 localTransform.ValueRW.Position = worldPosition;
                 if (math.lengthsq(worldTangent) < float.Epsilon) continue;
                 var forward = math.normalize(worldTangent);
