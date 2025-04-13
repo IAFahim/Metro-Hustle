@@ -1,11 +1,9 @@
 ﻿using ECSSplines.Runtime;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-namespace ECS_Spline.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     [RequireComponent(typeof(SplineContainer))]
     public class SplineComponentAuthoring : MonoBehaviour

@@ -1,18 +1,18 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-namespace ECS_Spline.Runtime.Datas
+namespace ECSUnitySplineAddon.Runtime.Datas
 {
     public class SplineMoverDataAuthoring : MonoBehaviour
     {
-        public float Speed;
+        public float speed;
 
         public class SplineMoverDataBaker : Baker<SplineMoverDataAuthoring>
         {
             public override void Bake(SplineMoverDataAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new SplineMoverData { speed = authoring.Speed });
+                AddComponent(entity, new SplineMoverData { speed = authoring.speed });
             }
         }
     }

@@ -7,11 +7,11 @@ namespace _src.Scripts.Object_Definition_Helper.Editor
 {
     internal static class ScriptableInit
     {
-        [MenuItem("Assets/Mod/Asset/Object Definition/New", priority = -1000)]
+        [MenuItem("Assets/Mod/Asset/Object Definition/Default", priority = -999)]
         internal static void CreateObjectDefinition()
         {
             var asset = ScriptableObject.CreateInstance<ObjectDefinition>();
-            SelectionExtension.CreateAsset(asset, "New ObjDef.asset");
+            SelectionExtension.CreateAsset(asset, "Default ObjDef.asset");
         }
     }
 }
