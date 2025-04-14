@@ -27,3 +27,11 @@ MonoBehaviour:
   - path: Runtime/Settings
     textAssets: []
     addFolderName: 0
+  - path: Editor
+    textAssets:
+    - {fileID: 4900000, guid: 732b685902634ce996934875b6e73773, type: 3}
+    addFolderName: 1
+  - path: Editor/Settings
+    textAssets:
+    - {fileID: 4900000, guid: 5307b2afa04a4b949a2e01ec8d5dc469, type: 3}
+    addFolderName: 1

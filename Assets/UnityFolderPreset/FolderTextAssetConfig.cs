@@ -1,12 +1,10 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Search;
 
 namespace UnityFolderPreset
 {
-    [CreateAssetMenu(fileName = "FolderFileConfig", menuName = "Create/new", order = 0)]
-    [FilePath("UnityEditorMods/Folders/FolderFileConfig.asset", FilePathAttribute.Location.PreferencesFolder)]
+    [CreateAssetMenu(fileName = "FolderTextAssetConfig.assets", menuName = "Config/FolderTextAsset Config")]
     public class FolderTextAssetConfig : ScriptableObject
     {
         public FolderTextAsset[] folderTextAssets;
