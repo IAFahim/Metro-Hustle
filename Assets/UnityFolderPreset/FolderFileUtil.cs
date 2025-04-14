@@ -2,9 +2,9 @@
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-namespace UnityEditorMods.Folders
+namespace UnityFolderPreset
 {
-    public static class FolderUtil
+    public static class FolderFileUtil
     {
         public static void CreateFile(
             string folderPath,
@@ -50,6 +50,12 @@ namespace UnityEditorMods.Folders
         {
             var pathCombined = Path.Combine(pathName, newFolderName);
             return CreateFolderAtPath(pathCombined, newFolderName);
+        }
+        
+        public static string ReadAndReplace(string fullPath, string with, string replace = "{{Name}}")
+        {
+            var content = File.ReadAllText(fullPath);
+            return content.Replace(content,with);
         }
     }
 }
