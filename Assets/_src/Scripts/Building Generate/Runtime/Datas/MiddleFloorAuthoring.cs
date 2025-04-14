@@ -5,7 +5,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public class MiddleFloorAuthoring : MonoBehaviour
     {
-        public GameObject middleFloorIndexes;
+        public int[] middleFloorIndexes;
         public class MiddleFloorBaker : Baker<MiddleFloorAuthoring>
         {
             public override void Bake(MiddleFloorAuthoring authoring)

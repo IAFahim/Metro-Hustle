@@ -5,7 +5,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public class RoofTopAuthoring : MonoBehaviour
     {
-        public GameObject[] roofTopIndexes;
+        public int[] roofTopIndexes;
         public class RoofTopBaker : Baker<RoofTopAuthoring>
         {
             public override void Bake(RoofTopAuthoring authoring)
