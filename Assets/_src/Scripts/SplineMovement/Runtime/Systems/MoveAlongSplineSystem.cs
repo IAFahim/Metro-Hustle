@@ -1,13 +1,15 @@
-﻿using ECSUnitySplineAddon.Runtime.Datas;
+﻿using BovineLabs.Core.Groups;
+using ECSUnitySplineAddon.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
+    [UpdateInGroup(typeof(BeforeTransformSystemGroup), OrderFirst = true)]
+    [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     [BurstCompile]
-    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
-    [UpdateAfter(typeof(MoveAlongSplineSystem))]
     public partial struct MoveAlongSplineSystem : ISystem
     {
         [BurstCompile]
@@ -24,6 +26,7 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            Debug.Log("Wow");
             float deltaTime = SystemAPI.Time.DeltaTime;
 
             Entity splineEntity = SystemAPI.GetSingletonEntity<NativeSplineBlobComponentData>();

@@ -1,6 +1,7 @@
 ﻿using _src.Scripts.Speeds.Runtime.Datas;
 using _src.Scripts.SplineMovement.Runtime.Datas;
 using ECSUnitySplineAddon.Runtime.Datas;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -8,6 +9,7 @@ using Unity.Transforms;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
+    [BurstCompile]
     public partial struct MoveAlongIJobEntity : IJobEntity
     {
         [ReadOnly] public float TimeDelta;
@@ -15,8 +17,8 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         [ReadOnly] public BlobAssetReference<NativeSplineBlob> SplineBlob;
 
 
+        [BurstCompile]
         private void Execute(
-            ref LocalTransform localTransform,
             ref SplineLinkComponentData splineLink,
             ref SplineEntityTransformTargetComponentData splineEntityTransformTarget,
             in SpeedComponentData speedComponentData

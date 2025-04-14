@@ -1,4 +1,9 @@
-﻿using Unity.Burst;
+﻿#if Aline
+using Drawing;
+#endif
+
+
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Scripts.{{Name}}.Editor

@@ -11,7 +11,9 @@
         "MainPlayerMaker.Runtime",
         "Speeds.Runtime",
         "Unity.Splines",
-        "ECS-Spline.Runtime"
+        "ECS-Spline.Runtime",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
