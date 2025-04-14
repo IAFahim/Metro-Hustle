@@ -4,6 +4,6 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public struct MiddleFloor : IBufferElementData
     {
-        public int MiddleFloorEntity;
+        public Entity MiddleFloorEntity;
     }
 }

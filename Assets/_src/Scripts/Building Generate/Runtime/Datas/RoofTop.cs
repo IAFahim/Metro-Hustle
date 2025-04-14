@@ -4,6 +4,6 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
 {
     public struct RoofTop : IBufferElementData
     {
-        public float RoofTopEntity;
+        public Entity RoofTopEntity;
     }
 }
