@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
@@ -9,64 +6,14 @@ namespace UnityEditorMods.Folders
 {
     public static class FolderUtil
     {
-        public static string CreateAsmdef(
+        public static void CreateFile(
             string folderPath,
-            string name,
-            string[] references,
-            bool isEditor
+            string fileName,
+            string contents
         )
         {
-            var asmdefRuntimeName = $"{name}.Runtime";
-            var asmdefEditorName = $"{name}.Editor";
-            var asmdefName = asmdefRuntimeName;
-            if (isEditor)
-            {
-                asmdefName = asmdefEditorName;
-                Array.Resize(ref references, references.Length + 1);
-                references[^1] = asmdefRuntimeName;
-            }
-
-            var json = CreateAsmdefFileContent(asmdefName, asmdefRuntimeName, references, isEditor);
-            var fullPath = Path.Combine(folderPath, asmdefName);
-            File.WriteAllText(fullPath += ".asmdef", json.ToString());
-            return fullPath;
-        }
-
-        public static StringBuilder CreateAsmdefFileContent(string asmdefName, string runtimeAsmdefName,
-            string[] references, bool isEditor)
-        {
-            StringBuilder json = new StringBuilder();
-            json.AppendLine("{");
-            json.AppendLine($"    \"name\": \"{asmdefName}\",");
-            json.AppendLine($"    \"rootNamespace\": \"\",");
-
-            json.AppendLine("    \"references\": [");
-            var allReferences = new List<string>(references ?? Array.Empty<string>());
-            if (isEditor && !allReferences.Contains(runtimeAsmdefName)) allReferences.Add(runtimeAsmdefName);
-            for (int i = 0; i < allReferences.Count; i++)
-            {
-                json.Append($"        \"{allReferences[i]}\"");
-                if (i < allReferences.Count - 1) json.Append(",");
-                json.AppendLine();
-            }
-
-            json.AppendLine("    ],");
-
-            json.AppendLine("    \"includePlatforms\": [");
-            if (isEditor) json.AppendLine("        \"Editor\"");
-            json.AppendLine("    ],");
-
-            json.AppendLine("    \"excludePlatforms\": [],");
-            json.AppendLine("    \"allowUnsafeCode\": false,");
-            json.AppendLine("    \"overrideReferences\": false,");
-            json.AppendLine("    \"precompiledReferences\": [],");
-            var autoReferenced = isEditor ? "false" : "true";
-            json.AppendLine($"    \"autoReferenced\": {autoReferenced},");
-            json.AppendLine("    \"defineConstraints\": [],");
-            json.AppendLine("    \"versionDefines\": [],");
-            json.AppendLine("    \"noEngineReferences\": false");
-            json.AppendLine("}");
-            return json;
+            var fullPath = Path.Combine(folderPath, fileName);
+            File.WriteAllText(fullPath, contents);
         }
 
         public static (string parentFolder, string[] subFolders) MakeFolderAndSubFolder(string folderPath,

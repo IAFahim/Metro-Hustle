@@ -8,7 +8,8 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "SplineMovement.Runtime"
+        "SplineMovement.Runtime",
+        "ALINE"
     ],
     "includePlatforms": [
         "Editor"
@@ -18,7 +19,15 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": false,
-    "defineConstraints": [],
-    "versionDefines": [],
+    "defineConstraints": [
+        "UNITY_EDITOR"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.arongranberg.aline",
+            "expression": "1.0.0",
+            "define": "Aline"
+        }
+    ],
     "noEngineReferences": false
 }

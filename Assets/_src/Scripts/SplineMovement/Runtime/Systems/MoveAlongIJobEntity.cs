@@ -1,0 +1,46 @@
+﻿using _src.Scripts.Speeds.Runtime.Datas;
+using _src.Scripts.SplineMovement.Runtime.Datas;
+using ECSUnitySplineAddon.Runtime.Datas;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
+
+namespace _src.Scripts.SplineMovement.Runtime.Systems
+{
+    public partial struct MoveAlongIJobEntity : IJobEntity
+    {
+        [ReadOnly] public float TimeDelta;
+        [ReadOnly] public LocalToWorld SplineLocalToWorld;
+        [ReadOnly] public BlobAssetReference<NativeSplineBlob> SplineBlob;
+
+
+        private void Execute(
+            ref LocalTransform localTransform,
+            ref SplineLinkComponentData splineLink,
+            ref SplineEntityTransformTargetComponentData splineEntityTransformTarget,
+            in SpeedComponentData speedComponentData
+        )
+        {
+            float curveLength = SplineBlob.Value.GetCurveLength(splineLink.CurveIndex);
+            float offsetThisFrame = speedComponentData.GetCurrentSpeed() * TimeDelta;
+            splineLink.DistancePassedInCurve += offsetThisFrame;
+            float normalizedT = splineLink.DistancePassedInCurve / curveLength;
+
+            SplineBlob.Value.Evaluate(splineLink.CurveIndex, normalizedT, out float3 localPosition,
+                out float3 localTangent, out float3 localUpVector);
+
+            float3 worldPosition = math.transform(SplineLocalToWorld.Value, localPosition);
+            float3 worldTangent = math.rotate(SplineLocalToWorld.Value, localTangent);
+            float3 worldUpVector = math.rotate(SplineLocalToWorld.Value, localUpVector);
+
+            // localTransform.Position = worldPosition;
+            splineEntityTransformTarget.Position = worldPosition;
+            if (math.lengthsq(worldTangent) < float.Epsilon) return;
+            var forward = math.normalize(worldTangent);
+            var up = math.normalize(worldUpVector);
+            // localTransform.Rotation = quaternion.LookRotationSafe(forward, up);
+            splineEntityTransformTarget.LookRotationSafe = quaternion.LookRotationSafe(forward, up);
+        }
+    }
+}

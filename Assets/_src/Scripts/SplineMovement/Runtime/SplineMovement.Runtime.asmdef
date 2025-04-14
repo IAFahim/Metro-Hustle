@@ -8,15 +8,10 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "BovineLabs.Core",
-        "BovineLabs.Core.Extensions",
         "MainPlayerMaker.Runtime",
         "Speeds.Runtime",
-        "InputProvider",
-        "ECSUnitySplineAddon.Runtime",
         "Unity.Splines",
-        "ECS-Spline.Runtime",
-        "MovementTarget.Runtime"
+        "ECS-Spline.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

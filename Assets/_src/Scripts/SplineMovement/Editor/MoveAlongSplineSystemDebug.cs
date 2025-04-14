@@ -1,0 +1,51 @@
+﻿#if Aline
+using Drawing;
+#endif
+
+using _src.Scripts.SplineMovement.Runtime.Datas;
+using _src.Scripts.SplineMovement.Runtime.Systems;
+using Unity.Transforms;
+using Unity.Burst;
+using Unity.Entities;
+
+namespace _src.Scripts.SplineMovement.Editor
+{
+    [BurstCompile]
+    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
+    [UpdateAfter(typeof(MoveAlongSplineSystem))]
+    internal partial struct MoveAlongSplineSystemDebug : ISystem
+    {
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+        }
+
+        public void OnUpdate(ref SystemState state)
+        {
+#if Aline
+            var builder = DrawingManager.GetBuilder();
+            foreach (var (
+                         localTransform,
+                         splineEntityTransformTargetComponentData
+                         )
+                     in SystemAPI.Query<
+                         RefRO<LocalTransform>,
+                         RefRO<SplineEntityTransformTargetComponentData>
+                     >())
+
+            {
+                builder.Arrow(
+                    localTransform.ValueRO.Position, splineEntityTransformTargetComponentData.ValueRO.Position
+                );
+            }
+
+            builder.Dispose();
+#endif
+        }
+
+        [BurstCompile]
+        public void OnDestroy(ref SystemState state)
+        {
+        }
+    }
+}
