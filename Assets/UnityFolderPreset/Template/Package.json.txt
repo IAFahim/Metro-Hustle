@@ -30,6 +30,5 @@
     ],
     "unity": "6000.0.44f1",
     "unityRelease": "44f1",
-    "version": "0.1.0",
-    
+    "version": "0.1.0"
 }

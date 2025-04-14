@@ -17,6 +17,10 @@ MonoBehaviour:
     textAssets:
     - {fileID: 4900000, guid: 3a0f17f819934b5c994a5faf1d495659, type: 3}
     addFolderName: 0
+  - path: 
+    textAssets:
+    - {fileID: 4900000, guid: 390042fe48e04dd990d13875aa34ef52, type: 3}
+    addFolderName: 0
   - path: Runtime
     textAssets:
     - {fileID: 4900000, guid: a3325b67dc9d4cb699e7e5c0e67a071f, type: 3}
