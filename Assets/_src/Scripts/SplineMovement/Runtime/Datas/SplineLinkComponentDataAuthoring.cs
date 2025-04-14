@@ -25,7 +25,10 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
                         DistancePassedInCurve = authoring.progress,
                         TraveledDistance = authoring.traveledDistance,
                         LineNumber = authoring.lineNumber
-                    });
+                    }
+                );
+
+                AddComponent(entity, new SplineEntityTransformTargetComponentData());
             }
         }
     }
