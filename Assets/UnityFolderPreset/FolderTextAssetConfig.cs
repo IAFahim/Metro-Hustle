@@ -27,12 +27,13 @@ namespace UnityFolderPreset
     public class FolderTextAsset
     {
         public string path;
-        [SearchContext("t:TextAsset .txt")]
-        public TextAsset[] textAssets;
 
-        [Tooltip("If True (New Folder, Runtime.asmdef) becomes -> NewFolder.Runtime.asmdef\n" +
-                 "If False (New Folder, package.json) Remains -> package.json"
+        [Tooltip(
+            "If True (New Folder, Runtime.asmdef) becomes -> NewFolder.Runtime.asmdef\n" +
+            "If False (New Folder, package.json) Remains -> package.json"
         )]
         public bool addFolderName = true;
+
+        [SearchContext("t:TextAsset .txt")] public TextAsset[] textAssets;
     }
 }

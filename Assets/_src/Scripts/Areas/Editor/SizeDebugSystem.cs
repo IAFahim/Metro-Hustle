@@ -23,7 +23,7 @@ namespace _src.Scripts.Areas.Editor
             foreach (var (localTransform, areaComponentData) in SystemAPI
                          .Query<RefRO<LocalTransform>, RefRO<AreaComponentData>>())
             {
-                float3 size = new float3(areaComponentData.ValueRO.Value.x, 0, areaComponentData.ValueRO.Value.x);
+                float3 size = new float3(areaComponentData.ValueRO.Value.x, 0, areaComponentData.ValueRO.Value.y);
                 builder.WireBox(localTransform.ValueRO.Position, localTransform.ValueRO.Rotation, size);
             }
 

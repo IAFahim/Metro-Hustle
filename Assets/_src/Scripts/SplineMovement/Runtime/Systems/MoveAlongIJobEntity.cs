@@ -20,14 +20,14 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         [BurstCompile]
         private void Execute(
             ref SplineLinkComponentData splineLink,
-            ref SplineEntityTransformTargetComponentData splineEntityTransformTarget,
+            ref SplineEntityLocationComponentData splineEntityLocation,
             in SpeedComponentData speedComponentData
         )
         {
             float curveLength = SplineBlob.Value.GetCurveLength(splineLink.CurveIndex);
             float offsetThisFrame = speedComponentData.GetCurrentSpeed() * TimeDelta;
-            splineLink.DistancePassedInCurve += offsetThisFrame;
-            float normalizedT = splineLink.DistancePassedInCurve / curveLength;
+            splineLink.DistanceInCurve += offsetThisFrame;
+            float normalizedT = (splineLink.DistanceInCurve + splineLink.DistanceOffset) / curveLength;
 
             SplineBlob.Value.Evaluate(splineLink.CurveIndex, normalizedT, out float3 localPosition,
                 out float3 localTangent, out float3 localUpVector);
@@ -37,12 +37,13 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
             float3 worldUpVector = math.rotate(SplineLocalToWorld.Value, localUpVector);
 
             // localTransform.Position = worldPosition;
-            splineEntityTransformTarget.Position = worldPosition;
+            splineEntityLocation.TraveledDistance += math.length(splineEntityLocation.Position - worldPosition);
+            splineEntityLocation.Position = worldPosition;
             if (math.lengthsq(worldTangent) < float.Epsilon) return;
             var forward = math.normalize(worldTangent);
             var up = math.normalize(worldUpVector);
             // localTransform.Rotation = quaternion.LookRotationSafe(forward, up);
-            splineEntityTransformTarget.LookRotationSafe = quaternion.LookRotationSafe(forward, up);
+            splineEntityLocation.LookRotationSafe = quaternion.LookRotationSafe(forward, up);
         }
     }
 }

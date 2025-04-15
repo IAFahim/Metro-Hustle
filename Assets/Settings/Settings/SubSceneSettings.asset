@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SceneSets:
   - {fileID: 11400000, guid: bb5b451007a245b488bf1bca868e54a6, type: 2}
-  - {fileID: 11400000, guid: 6c35c31cb86c63c42a0c2e9ab118a37d, type: 2}
   - {fileID: 11400000, guid: 28126daff98b83c41b802466bac62743, type: 2}
   EditorSceneSets: []
   AssetSets: []

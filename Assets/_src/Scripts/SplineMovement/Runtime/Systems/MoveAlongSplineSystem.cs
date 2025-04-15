@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
-    [UpdateInGroup(typeof(BeforeTransformSystemGroup), OrderFirst = true)]
-    [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     [BurstCompile]
+    [UpdateInGroup(typeof(AfterTransformSystemGroup), OrderFirst = true)]
+    [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     public partial struct MoveAlongSplineSystem : ISystem
     {
         [BurstCompile]
@@ -17,17 +17,13 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         {
             state.RequireForUpdate<NativeSplineBlobComponentData>();
         }
-
-        [BurstCompile]
-        public void OnDestroy(ref SystemState state)
-        {
-        }
+        
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            Debug.Log("Wow");
             float deltaTime = SystemAPI.Time.DeltaTime;
+            if (state.WorldUnmanaged.Flags == WorldFlags.Editor) deltaTime = 0;
 
             Entity splineEntity = SystemAPI.GetSingletonEntity<NativeSplineBlobComponentData>();
             NativeSplineBlobComponentData nativeSplineBlobComponentData =
@@ -40,6 +36,11 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
                 SplineBlob = nativeSplineBlobComponentData.Value,
             };
             moveAlongIJobEntity.Schedule();
+        }
+        
+        [BurstCompile]
+        public void OnDestroy(ref SystemState state)
+        {
         }
     }
 }

@@ -195,8 +195,8 @@ MonoBehaviour:
   splineIndex: 0
   curveIndex: 0
   lineNumber: 0
-  progress: 0
-  traveledDistance: 0
+  distanceInCurve: 0
+  distanceOffset: 0
 --- !u!1 &508957138
 GameObject:
   m_ObjectHideFlags: 0
