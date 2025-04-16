@@ -9,7 +9,9 @@
         "Unity.Collections",
         "Unity.Mathematics",
         "SplineMovement.Runtime",
-        "ALINE"
+        "ALINE",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Extensions"
     ],
     "includePlatforms": [
         "Editor"

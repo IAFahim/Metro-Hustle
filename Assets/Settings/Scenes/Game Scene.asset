@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 1
   Scenes:
-  - {fileID: 102900000, guid: f50ad9fca563c094f826099505f432c7, type: 3}
   - {fileID: 102900000, guid: ea2277ffbfc9c8e4a9e0bd0c05a71a62, type: 3}
   - {fileID: 102900000, guid: 3583a58d3efd4ff4c8c0889fb999170d, type: 3}
   TargetWorld: 1

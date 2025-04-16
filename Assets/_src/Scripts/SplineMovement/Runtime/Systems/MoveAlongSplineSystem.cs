@@ -1,13 +1,15 @@
-﻿using ECSUnitySplineAddon.Runtime.Datas;
+﻿using BovineLabs.Core.Groups;
+using ECSUnitySplineAddon.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
-    [UpdateAfter(typeof(MoveAlongSplineSystem))]
+    [UpdateInGroup(typeof(AfterTransformSystemGroup), OrderFirst = true)]
+    [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     public partial struct MoveAlongSplineSystem : ISystem
     {
         [BurstCompile]
@@ -15,16 +17,13 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         {
             state.RequireForUpdate<NativeSplineBlobComponentData>();
         }
-
-        [BurstCompile]
-        public void OnDestroy(ref SystemState state)
-        {
-        }
+        
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             float deltaTime = SystemAPI.Time.DeltaTime;
+            if (state.WorldUnmanaged.Flags == WorldFlags.Editor) deltaTime = 0;
 
             Entity splineEntity = SystemAPI.GetSingletonEntity<NativeSplineBlobComponentData>();
             NativeSplineBlobComponentData nativeSplineBlobComponentData =
@@ -37,6 +36,11 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
                 SplineBlob = nativeSplineBlobComponentData.Value,
             };
             moveAlongIJobEntity.Schedule();
+        }
+        
+        [BurstCompile]
+        public void OnDestroy(ref SystemState state)
+        {
         }
     }
 }

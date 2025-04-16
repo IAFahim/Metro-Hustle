@@ -1,0 +1,22 @@
+﻿{
+    "author": {
+        "email": "iafahim.dev@gmail.com",
+        "name": "Md. Ishtiaq Ahamed Fahim",
+        "url": "https://github.com/IAFahim"
+    },
+    "changelogUrl": "https://github.com/IAFahim/UnityFolderPreset",
+    "dependencies": {
+    },
+    "description": "UnityFolderPreset",
+    "displayName": "UnityFolderPreset",
+    "documentationUrl": "https://github.com/IAFahim/UnityFolderPreset",
+    "keywords": [
+        "ecs",
+        "folder",
+        "preset"
+    ],
+    "name": "unityfolderpreset",
+    "unity": "2020.3",
+    "unityRelease": "48f1",
+    "version": "1.7.7"
+}

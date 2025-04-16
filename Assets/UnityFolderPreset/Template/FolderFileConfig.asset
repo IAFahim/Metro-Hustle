@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352844168e3f459191eb847f6b141fa3, type: 3}
+  m_Name: FolderFileConfig
+  m_EditorClassIdentifier: 
+  folderTextAssets:
+  - path: 
+    textAssets:
+    - {fileID: 4900000, guid: 3a0f17f819934b5c994a5faf1d495659, type: 3}
+    addFolderName: 0
+  - path: 
+    textAssets:
+    - {fileID: 4900000, guid: 390042fe48e04dd990d13875aa34ef52, type: 3}
+    addFolderName: 0
+  - path: Runtime
+    textAssets:
+    - {fileID: 4900000, guid: a3325b67dc9d4cb699e7e5c0e67a071f, type: 3}
+    addFolderName: 1
+  - path: Runtime/Datas
+    textAssets: []
+    addFolderName: 0
+  - path: Runtime/Settings
+    textAssets: []
+    addFolderName: 0
+  - path: Editor
+    textAssets:
+    - {fileID: 4900000, guid: 732b685902634ce996934875b6e73773, type: 3}
+    addFolderName: 1
+  - path: Editor/Settings
+    textAssets:
+    - {fileID: 4900000, guid: 5307b2afa04a4b949a2e01ec8d5dc469, type: 3}
+    addFolderName: 1

@@ -1,9 +1,11 @@
 ﻿#if Aline
 using Drawing;
+using UnityEngine;
 #endif
 
 using _src.Scripts.SplineMovement.Runtime.Datas;
 using _src.Scripts.SplineMovement.Runtime.Systems;
+using BovineLabs.Core.Groups;
 using Unity.Transforms;
 using Unity.Burst;
 using Unity.Entities;
@@ -11,8 +13,9 @@ using Unity.Entities;
 namespace _src.Scripts.SplineMovement.Editor
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
-    [UpdateAfter(typeof(MoveAlongSplineSystem))]
+    
+    [UpdateInGroup(typeof(AfterTransformSystemGroup), OrderLast = true)]
+    [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     internal partial struct MoveAlongSplineSystemDebug : ISystem
     {
         [BurstCompile]
@@ -23,6 +26,7 @@ namespace _src.Scripts.SplineMovement.Editor
         public void OnUpdate(ref SystemState state)
         {
 #if Aline
+            
             var builder = DrawingManager.GetBuilder();
             foreach (var (
                          localTransform,
@@ -30,7 +34,7 @@ namespace _src.Scripts.SplineMovement.Editor
                          )
                      in SystemAPI.Query<
                          RefRO<LocalTransform>,
-                         RefRO<SplineEntityTransformTargetComponentData>
+                         RefRO<SplineEntityLocationComponentData>
                      >())
 
             {
