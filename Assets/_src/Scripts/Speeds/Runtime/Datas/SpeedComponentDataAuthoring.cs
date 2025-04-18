@@ -1,12 +1,12 @@
 ﻿using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _src.Scripts.Speeds.Runtime.Datas
 {
     public class SpeedComponentDataAuthoring : MonoBehaviour
     {
-        public float speed = 0.1f;
-        public float multiplier = 1;
+        public float meterPerSecond = 1.3f;
 
         public class SpeedComponentDataBaker : Baker<SpeedComponentDataAuthoring>
         {
@@ -15,8 +15,7 @@ namespace _src.Scripts.Speeds.Runtime.Datas
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent(entity, new SpeedComponentData
                 {
-                    BaseSpeed = authoring.speed,
-                    Multiplier = authoring.multiplier
+                    MeterPerSecond = authoring.meterPerSecond
                 });
             }
         }

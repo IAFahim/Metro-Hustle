@@ -31,7 +31,6 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
 
                 AddComponent(entity, new SplineEntityLocationComponentData()
                 {
-                    TraveledDistance = 0,
                     Position = 0,
                     LookRotationSafe = new quaternion()
                 });
