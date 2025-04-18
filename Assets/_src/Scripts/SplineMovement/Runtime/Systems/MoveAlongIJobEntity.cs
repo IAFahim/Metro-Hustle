@@ -25,8 +25,9 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         )
         {
             float curveLength = SplineBlob.Value.GetCurveLength(splineLink.CurveIndex);
-            float offsetThisFrame = speedComponentData.GetCurrentSpeed() * TimeDelta;
+            float offsetThisFrame = speedComponentData.MeterPerSecond * TimeDelta;
             splineLink.DistanceInCurve += offsetThisFrame;
+            splineLink.TraveledDistance += math.abs(offsetThisFrame);
             float normalizedT = (splineLink.DistanceInCurve + splineLink.DistanceOffset) / curveLength;
 
             SplineBlob.Value.Evaluate(splineLink.CurveIndex, normalizedT, out float3 localPosition,
@@ -36,13 +37,10 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
             float3 worldTangent = math.rotate(SplineLocalToWorld.Value, localTangent);
             float3 worldUpVector = math.rotate(SplineLocalToWorld.Value, localUpVector);
 
-            // localTransform.Position = worldPosition;
-            splineEntityLocation.TraveledDistance += math.length(splineEntityLocation.Position - worldPosition);
             splineEntityLocation.Position = worldPosition;
             if (math.lengthsq(worldTangent) < float.Epsilon) return;
             var forward = math.normalize(worldTangent);
             var up = math.normalize(worldUpVector);
-            // localTransform.Rotation = quaternion.LookRotationSafe(forward, up);
             splineEntityLocation.LookRotationSafe = quaternion.LookRotationSafe(forward, up);
         }
     }
