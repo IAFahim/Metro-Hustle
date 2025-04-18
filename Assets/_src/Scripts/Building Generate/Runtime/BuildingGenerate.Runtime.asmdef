@@ -10,7 +10,8 @@
         "Unity.Mathematics",
         "BovineLabs.Core",
         "BovineLabs.Core.Extensions",
-        "Areas.Runtime"
+        "Areas.Runtime",
+        "Dimensions.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
