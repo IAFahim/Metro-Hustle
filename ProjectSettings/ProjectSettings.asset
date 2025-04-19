@@ -817,7 +817,7 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Standalone: BL_CORE_EXTENSIONS;BL_DISABLE_PHYSICS_STATES
+    Standalone: BL_CORE_EXTENSIONS;BL_DISABLE_PHYSICS_STATES;UNITY_PHYSICS_CUSTOM
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
