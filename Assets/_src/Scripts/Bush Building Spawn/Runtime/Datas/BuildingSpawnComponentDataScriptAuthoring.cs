@@ -4,23 +4,25 @@ using UnityEngine;
 public class BuildingSpawnComponentDataScriptAuthoring : MonoBehaviour
 {
     public GameObject[] floors;
+    public int count;
+    public int highestCount;
     public class BuildingSpawnComponentDataScriptBaker : Baker<BuildingSpawnComponentDataScriptAuthoring>
     {
         public override void Bake(BuildingSpawnComponentDataScriptAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            foreach (var floorPrefab in authoring.floors)
-            {
-                AddComponent<BuildingSpawnComponentData>(entity, new BuildingSpawnComponentData()
+            AddComponent<BuildingSpawnComponentData>(entity, new BuildingSpawnComponentData()
                 {
-                    FloorPrefab = GetEntity(floorPrefab,TransformUsageFlags.None)
+                    FloorPrefab = GetEntity(authoring.floors[0],TransformUsageFlags.None),
+                    Count=authoring.count,
+                    HighestCount =  authoring.highestCount
+                   
                 });
-                
-            }
 
-          
-            
+
+
+
         }
     }
 }

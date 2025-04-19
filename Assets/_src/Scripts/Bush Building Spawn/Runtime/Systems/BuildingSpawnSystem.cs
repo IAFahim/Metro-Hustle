@@ -16,10 +16,14 @@ namespace _src.Scripts.Bush_Building_Spawn.Runtime.Systems
         {
             var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
-            foreach (var buildingSpawnComponentData in SystemAPI.Query<RefRO<BuildingSpawnComponentData>>())
+            foreach (var buildingSpawnComponentData in SystemAPI.Query<RefRW<BuildingSpawnComponentData>>())
             {
-                var prefab = buildingSpawnComponentData.ValueRO.FloorPrefab;
-                ecb.Instantiate(prefab);
+                if (buildingSpawnComponentData.ValueRO.Count < buildingSpawnComponentData.ValueRO.HighestCount)
+                {
+                    var prefab = buildingSpawnComponentData.ValueRO.FloorPrefab;
+                    ecb.Instantiate(prefab);
+                    buildingSpawnComponentData.ValueRW.Count++;
+                }
             }
         }
 
