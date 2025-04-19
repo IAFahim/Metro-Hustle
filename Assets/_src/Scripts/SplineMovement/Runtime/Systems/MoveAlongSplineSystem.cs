@@ -3,7 +3,6 @@ using ECSUnitySplineAddon.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
