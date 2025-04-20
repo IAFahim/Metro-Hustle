@@ -6,8 +6,8 @@ namespace _src.Scripts.Collision_Effect.Runtime.Datas
 {
     public class CollisionEffectComponentDataAuthoring : MonoBehaviour
     {
-        [K("CollisionEffectSettings")]
-        public int effectId;
+        [K("CollisionEffectSettings", true)]
+        public byte effectId;
 
         public class CollisionEffectComponentDataBaker : Baker<CollisionEffectComponentDataAuthoring>
         {

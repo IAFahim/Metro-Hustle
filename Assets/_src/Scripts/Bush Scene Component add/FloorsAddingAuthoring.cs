@@ -15,7 +15,7 @@ namespace _src.Scripts.Bush_Scene_Component_add
                 {
                     AddComponent<FloorsAdding>(entity,new FloorsAdding()
                     {
-                        Floor = GetEntity(floor)
+                        Floor = GetEntity(floor, TransformUsageFlags.None)
                     });
                     
                 }

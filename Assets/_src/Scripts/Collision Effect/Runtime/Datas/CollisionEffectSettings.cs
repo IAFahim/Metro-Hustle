@@ -6,19 +6,10 @@ using UnityEngine;
 
 namespace _src.Scripts.Collision_Effect.Runtime.Datas
 {
-    public class CollisionEffectSettings : KSettingsBase<CollisionEffectSettings, int>
+    public class CollisionEffectSettings : KSettingsBase<CollisionEffectSettings, byte>
     {
-        [SerializeField] private KeyValues[] keys = Array.Empty<KeyValues>();
-
-        // Implemented method to convert our custom authoring
-        public override IEnumerable<NameValue<int>> Keys => keys.Select(k => new NameValue<int>(k.name, k.value));
-
-        [Serializable]
-        public class KeyValues
-        {
-            public string name = string.Empty;
-
-            [Min(0)] public int value = -1;
-        }
+        [SerializeField] private NameValue<byte>[] keys = Array.Empty<NameValue<byte>>();
+        public override IEnumerable<NameValue<byte>> Keys => keys.Select(k => new NameValue<byte>(k.Name, k.Value));
+        
     }
 }

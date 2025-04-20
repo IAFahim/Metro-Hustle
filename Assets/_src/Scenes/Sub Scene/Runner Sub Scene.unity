@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77f3bd8dc5f412ba74691e3c80e0567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectId: 0
+  effectId: 6
 --- !u!1 &460723440
 GameObject:
   m_ObjectHideFlags: 0

@@ -817,11 +817,12 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Standalone: BL_CORE_EXTENSIONS;UNITY_PHYSICS_CUSTOM;BL_PHYSICS_ALWAYS_UPDATE
+    Standalone: BL_CORE_EXTENSIONS;UNITY_PHYSICS_CUSTOM;BL_PHYSICS_ALWAYS_UPDATE;UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   il2cppStacktraceInformation: {}
