@@ -1,14 +1,11 @@
-﻿using BovineLabs.Core.Groups;
-using ECSUnitySplineAddon.Runtime.Datas;
+﻿using ECSUnitySplineAddon.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(AfterTransformSystemGroup), OrderFirst = true)]
     [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     public partial struct MoveAlongSplineSystem : ISystem
     {

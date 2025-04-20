@@ -39,14 +39,13 @@ namespace UnityFolderPreset
         }
 
         private static void AddFiles(string parentDirectory, string fileNameWithoutSpace,
-            FolderTextAsset folderTextAsset)
+            FolderTextAsset folderTextAsset, string tagToReplaceInFileName = "{{Name}}")
         {
             if (folderTextAsset.textAssets == null) return;
             foreach (var textAsset in folderTextAsset.textAssets)
             {
-                var newFileName = textAsset.name;
                 // {fileNameWithoutSpace} + "Runtime.asmdef"
-                if (folderTextAsset.addFolderName) newFileName = fileNameWithoutSpace + '.' + newFileName;
+                var newFileName = textAsset.name.Replace(tagToReplaceInFileName, fileNameWithoutSpace);
                 var relativePath = Path.Combine(parentDirectory, folderTextAsset.path);
                 var relativeFullFilePath = Path.Combine(relativePath, newFileName);
                 // {{Name}} -> {fileNameWithoutSpace}

@@ -7,7 +7,7 @@ namespace _src.Scripts.Object_Definition_Helper.Editor
 {
     internal static class ScriptableInit
     {
-        [MenuItem("Assets/Mod/Asset/Object Definition/Default", priority = -999)]
+        [MenuItem("Assets/Mod/Object Definition/Default", priority = 23)]
         internal static void CreateObjectDefinition()
         {
             var asset = ScriptableObject.CreateInstance<ObjectDefinition>();

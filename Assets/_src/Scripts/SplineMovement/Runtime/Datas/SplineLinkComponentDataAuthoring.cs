@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿#if UNITY_EDITOR
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -31,7 +32,6 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
 
                 AddComponent(entity, new SplineEntityLocationComponentData()
                 {
-                    TraveledDistance = 0,
                     Position = 0,
                     LookRotationSafe = new quaternion()
                 });
@@ -39,3 +39,4 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
         }
     }
 }
+#endif

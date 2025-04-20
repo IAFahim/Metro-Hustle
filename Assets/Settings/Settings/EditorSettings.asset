@@ -29,6 +29,8 @@ MonoBehaviour:
     Path: Assets/Settings/Scenes/Assets
   - Key: definitions
     Path: Assets/Settings/Definitions
+  - Key: reaction.conditions
+    Path: Assets/Settings/Schemas/Events/
   prebakeScenes: []
   startupScene: {fileID: 0}
   defaultSettingsAuthoring: {fileID: 0}

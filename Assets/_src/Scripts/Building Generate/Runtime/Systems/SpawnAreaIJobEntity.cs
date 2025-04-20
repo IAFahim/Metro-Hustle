@@ -1,6 +1,6 @@
-﻿using _src.Scripts.Areas.Runtime.Datas;
-using _src.Scripts.Building_Generate.Runtime.Datas;
+﻿using _src.Scripts.Building_Generate.Runtime.Datas;
 using _src.Scripts.Building_Generate.Runtime.Gen;
+using _src.Scripts.Dimensions.Runtime.Datas;
 using BovineLabs.Core.Entropy;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -15,34 +15,34 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
 
         private void Execute(
             Entity entity, [EntityIndexInChunk] int entityIndexInChunk,
-            ref SpawnCountComponentData spawnCountComponentData,
+            ref SpawnGapAndCountComponentData spawnGapAndCountComponentData,
             in LocalTransform localTransform,
-            in AreaComponentData areaComponentData
+            in Dimensions2DComponentData dimensions2D
         )
         {
-            if (spawnCountComponentData.Count <= 0) return;
+            if (spawnGapAndCountComponentData.Count <= 0) return;
             var groundFloorBuffers = GroundFloorBufferLookup[entity];
-            for (int i = 0; i < spawnCountComponentData.Count; i++)
+            for (int i = 0; i < spawnGapAndCountComponentData.Count; i++)
             {
-                var randomPosition3 = GlobalRandom.NextFloat2();
-                var x = randomPosition3.x * areaComponentData.Value.x;
-                var y = localTransform.Position.y;
-                var z = randomPosition3.y * areaComponentData.Value.y;
-                var position = new float3(x, y, z);
+                var xRand = GlobalRandom.NextFloat();
+                var zRand = GlobalRandom.NextFloat();
+                var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
+                var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
+                var position = new float3(x, 0, z);
                 var randomUp = GlobalRandom.NextFloat() * 10;
 
                 var groundFloorIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
                 var groundFloor = groundFloorBuffers[groundFloorIndex];
 
                 var createdEntity = ECB.Instantiate(entityIndexInChunk, groundFloor.Prefab);
-                var randomPositionAndRoation = new LocalTransform()
+                var positionAndRotation = new LocalTransform()
                 {
-                    Position = position,
+                    Position = position + localTransform.Position,
                     Rotation = quaternion.EulerXYZ(0, randomUp, 0),
                     Scale = 1
                 };
-                ECB.AddComponent(entityIndexInChunk, createdEntity, randomPositionAndRoation);
-                spawnCountComponentData.Count--;
+                ECB.AddComponent(entityIndexInChunk, createdEntity, positionAndRotation);
+                spawnGapAndCountComponentData.Count--;
             }
         }
     }

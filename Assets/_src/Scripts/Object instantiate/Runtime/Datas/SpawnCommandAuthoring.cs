@@ -1,4 +1,5 @@
-﻿using BovineLabs.Core.Authoring.ObjectManagement;
+﻿#if UNITY_EDITOR
+using BovineLabs.Core.Authoring.ObjectManagement;
 using Unity.Entities;
 using UnityEngine;
 
@@ -22,3 +23,4 @@ namespace _src.Scripts.Object_instantiate.Runtime.Datas
         }
     }
 }
+#endif

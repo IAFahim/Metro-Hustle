@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿#if UNITY_EDITOR
+using Unity.Entities;
 using UnityEngine;
 
 namespace _src.Scripts.Spawn_Points.Runtime.Datas
@@ -15,3 +16,4 @@ namespace _src.Scripts.Spawn_Points.Runtime.Datas
         }
     }
 }
+#endif
