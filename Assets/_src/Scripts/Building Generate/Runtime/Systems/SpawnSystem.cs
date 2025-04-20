@@ -28,6 +28,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
                 ECB = ecb.AsParallelWriter()
             };
             spawnAreaIJobEntity.Schedule();
+            
         }
 
         [BurstCompile]
