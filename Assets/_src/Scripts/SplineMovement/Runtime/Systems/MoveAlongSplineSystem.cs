@@ -1,5 +1,4 @@
-﻿using BovineLabs.Core.Groups;
-using ECSUnitySplineAddon.Runtime.Datas;
+﻿using ECSUnitySplineAddon.Runtime.Datas;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
