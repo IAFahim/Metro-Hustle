@@ -1,5 +1,5 @@
-﻿using Unity.Entities;
-using Unity.Mathematics.Geometry;
+﻿#if UNITY_EDITOR
+using Unity.Entities;
 using UnityEngine;
 
 namespace _src.Scripts.Players.Runtime.Datas
@@ -17,3 +17,4 @@ namespace _src.Scripts.Players.Runtime.Datas
         }
     }
 }
+#endif

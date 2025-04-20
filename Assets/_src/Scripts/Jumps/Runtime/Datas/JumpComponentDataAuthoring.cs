@@ -1,4 +1,5 @@
-﻿using _src.Scripts.Easings.Runtime.Datas;
+﻿#if UNITY_EDITOR
+using _src.Scripts.Easings.Runtime.Datas;
 using Unity.Entities;
 using UnityEngine;
 
@@ -42,3 +43,4 @@ namespace _src.Scripts.Jumps.Runtime.Datas
         }
     }
 }
+#endif

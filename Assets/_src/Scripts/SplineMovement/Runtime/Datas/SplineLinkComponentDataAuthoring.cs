@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿#if UNITY_EDITOR
+using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -38,3 +39,4 @@ namespace _src.Scripts.SplineMovement.Runtime.Datas
         }
     }
 }
+#endif

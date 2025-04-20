@@ -1,4 +1,5 @@
-﻿using BovineLabs.Core.ObjectManagement;
+﻿#if UNITY_EDITOR
+using BovineLabs.Core.ObjectManagement;
 using Unity.Entities;
 using UnityEngine;
 
@@ -27,3 +28,4 @@ namespace _src.Scripts.PlayerInputs.Runtime
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using BovineLabs.Core.Keys;
+﻿#if UNITY_EDITOR
+using BovineLabs.Core.Keys;
 using Unity.Entities;
 using UnityEngine;
 
@@ -19,3 +20,4 @@ namespace _src.Scripts.Collision_Effect.Runtime.Datas
         }
     }
 }
+#endif
