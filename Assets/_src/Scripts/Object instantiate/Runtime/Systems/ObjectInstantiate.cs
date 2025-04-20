@@ -1,5 +1,4 @@
 ﻿using _src.Scripts.Object_instantiate.Runtime.Datas;
-using BovineLabs.Core.Groups;
 using BovineLabs.Core.ObjectManagement;
 using Unity.Burst;
 using Unity.Entities;
@@ -8,7 +7,6 @@ using Unity.Transforms;
 namespace _src.Scripts.Object_instantiate.Runtime.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(AfterSceneSystemGroup))]
     public partial struct ObjectInstantiate : ISystem
     {
         [BurstCompile]

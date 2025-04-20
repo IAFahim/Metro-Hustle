@@ -7,7 +7,6 @@ using Unity.Transforms;
 namespace _src.Scripts.SplineMovement.Runtime.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(AfterTransformSystemGroup), OrderFirst = true)]
     [WorldSystemFilter(WorldSystemFilterFlags.Default | WorldSystemFilterFlags.Editor)]
     public partial struct MoveAlongSplineSystem : ISystem
     {
