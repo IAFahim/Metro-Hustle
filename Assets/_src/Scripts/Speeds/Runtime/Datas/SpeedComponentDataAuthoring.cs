@@ -1,6 +1,5 @@
 ﻿using Unity.Entities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _src.Scripts.Speeds.Runtime.Datas
 {

@@ -6,7 +6,7 @@ namespace UnityFolderPreset.Template
 {
     internal static class FolderPresetSample
     {
-        [MenuItem("Assets/Folder Preset/Sample", priority = -100)]
+        [MenuItem("Assets/Folder Preset/New Folder", priority = 22)]
         private static void Create()
         {
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0,

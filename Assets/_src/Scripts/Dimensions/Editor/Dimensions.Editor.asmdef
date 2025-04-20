@@ -9,14 +9,13 @@
         "Unity.Collections",
         "Unity.Mathematics",
         "Dimensions.Runtime",
-        "ALINE",
-        "Dimensions2D.Runtime"
+        "ALINE"
     ],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": false,

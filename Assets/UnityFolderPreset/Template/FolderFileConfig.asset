@@ -14,28 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   folderTextAssets:
   - path: 
-    addFolderName: 0
     textAssets:
     - {fileID: 4900000, guid: 3a0f17f819934b5c994a5faf1d495659, type: 3}
   - path: 
-    addFolderName: 0
     textAssets:
     - {fileID: 4900000, guid: 390042fe48e04dd990d13875aa34ef52, type: 3}
   - path: Runtime
-    addFolderName: 1
     textAssets:
     - {fileID: 4900000, guid: a3325b67dc9d4cb699e7e5c0e67a071f, type: 3}
   - path: Runtime/Datas
-    addFolderName: 0
     textAssets: []
   - path: Runtime/Systems
-    addFolderName: 0
     textAssets: []
   - path: Editor
-    addFolderName: 1
     textAssets:
     - {fileID: 4900000, guid: 732b685902634ce996934875b6e73773, type: 3}
   - path: Editor/Systems
-    addFolderName: 1
     textAssets:
     - {fileID: 4900000, guid: 5307b2afa04a4b949a2e01ec8d5dc469, type: 3}

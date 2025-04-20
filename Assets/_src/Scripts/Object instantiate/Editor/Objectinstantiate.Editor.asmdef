@@ -8,7 +8,11 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "Objectinstantiate.Runtime"
+        "Objectinstantiate.Runtime",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Authoring",
+        "BovineLabs.Core.Extensions",
+        "BovineLabs.Core.Extensions.Authoring"
     ],
     "includePlatforms": [
         "Editor"

@@ -16,38 +16,37 @@ namespace _src.Scripts.Jumps.Runtime.Settings
             void Execute(ref JumpComponentData jump, ref LocalTransform transform)
             {
                 jump.ElapsedTime += DeltaTime;
-                if (HandleRise(ref jump, out var riseDuration)) return;
-                if (HandleAir(jump, riseDuration, out var endAirTime)) return;
-                if (HandleFall(ref jump, endAirTime)) return;
+                if (IsProcessingRiseStage(ref jump, out float riseEndDuration)) return;
+                if (IsProcessingAirStage(ref jump, riseEndDuration, out float endAirEndDuration)) return;
+                if (IsProcessingFallStage(ref jump, endAirEndDuration)) return;
             }
 
             [BurstCompile]
-            private static bool HandleFall(ref JumpComponentData jump, float endAirTime)
+            private static bool IsProcessingFallStage(ref JumpComponentData jump, float endAirTime)
             {
                 var fallTime = jump.FallDuration * jump.FallDurationMultiplier;
                 var endFallTime = endAirTime + fallTime;
                 if (jump.ElapsedTime > endFallTime) return false;
                 float t = (endFallTime - jump.ElapsedTime) / fallTime;
-                var fall = jump.FallEase.Evaluate(t) * jump.MaxHeight;
-                jump.CurrentHeight = fall;
+                jump.CurrentHeight = jump.FallEase.Evaluate(t) * jump.MaxHeight;
                 return true;
             }
 
             [BurstCompile]
-            private static bool HandleAir(JumpComponentData jump, float riseDuration, out float endAirTime)
+            private static bool IsProcessingAirStage(ref JumpComponentData jump, float riseDuration,
+                out float endAirTime)
             {
                 endAirTime = riseDuration + jump.AirTime;
                 return jump.ElapsedTime < endAirTime;
             }
 
             [BurstCompile]
-            private static bool HandleRise(ref JumpComponentData jump, out float riseDuration)
+            private static bool IsProcessingRiseStage(ref JumpComponentData jump, out float riseEndDuration)
             {
-                riseDuration = jump.RiseDuration * jump.RiseDurationMultiplier;
-                if (jump.ElapsedTime > riseDuration) return false;
-                float t = jump.ElapsedTime / riseDuration;
-                var height = jump.RiseEase.Evaluate(t) * jump.MaxHeight;
-                jump.CurrentHeight = height;
+                riseEndDuration = jump.RiseDuration * jump.RiseDurationMultiplier;
+                if (jump.ElapsedTime > riseEndDuration) return false;
+                float t = jump.ElapsedTime / riseEndDuration;
+                jump.CurrentHeight = jump.RiseEase.Evaluate(t) * jump.MaxHeight;
                 return true;
             }
         }
