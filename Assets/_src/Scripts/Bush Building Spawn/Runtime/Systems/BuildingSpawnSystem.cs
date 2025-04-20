@@ -27,7 +27,7 @@ namespace _src.Scripts.Bush_Building_Spawn.Runtime.Systems
                     {
                         var prefab = buildingSpawnComponentData.ValueRO.FloorPrefab;
                         ecb.Instantiate(prefab);
-                        var localTransform = new LocalTransform()
+                        var localTransform = new LocalTransform
                         {
                             Position = new float3(0, i, 0),
                             Scale = 1

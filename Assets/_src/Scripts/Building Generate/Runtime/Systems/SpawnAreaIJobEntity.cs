@@ -5,6 +5,7 @@ using BovineLabs.Core.Entropy;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace _src.Scripts.Building_Generate.Runtime.Systems
 {
@@ -22,13 +23,15 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
         {
             if (spawnGapAndCountComponentData.Count <= 0) return;
             var groundFloorBuffers = GroundFloorBufferLookup[entity];
-            for (int i = 0; i < spawnGapAndCountComponentData.Count; i++)
+            var xRand = GlobalRandom.NextFloat();
+            var zRand = GlobalRandom.NextFloat();
+            var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
+            var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
+            var count = spawnGapAndCountComponentData.Count;
+            for (int i = 0; i < count; i--)
             {
-                var xRand = GlobalRandom.NextFloat();
-                var zRand = GlobalRandom.NextFloat();
-                var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
-                var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
-                var position = new float3(x, 0, z);
+                var position = new float3(x, i, z);
+                Debug.Log(position);
                 var randomUp = GlobalRandom.NextFloat() * 10;
 
                 var groundFloorIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
