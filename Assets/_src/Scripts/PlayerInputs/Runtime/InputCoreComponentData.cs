@@ -6,22 +6,10 @@ namespace BovineLabs.Core.Input
 {
     public partial struct InputCoreComponentData : IComponentData
     {
-#if UNITY_EDITOR
-        [InputAction]
-#endif
-        public float2 MoveCurrent;
-#if UNITY_EDITOR
-        [InputActionDelta]
-#endif
-        public float2 MoveDelta;
-#if UNITY_EDITOR
-        [InputActionDown]
-#endif
-        public bool Sprint;
-#if UNITY_EDITOR
-        [InputAction]
-#endif
-        public bool Jump;
+        [InputAction] public float2 MoveCurrent;
+        [InputActionDelta] public float2 MoveDelta;
+        [InputActionDown] public bool Sprint;
+        [InputAction] public bool Jump;
     }
 }
 #endif
