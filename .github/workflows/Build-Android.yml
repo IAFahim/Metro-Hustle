@@ -39,3 +39,46 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+  create-release:
+    name: Create GitHub Release
+    # Run this job only if the build job completed successfully
+    needs: buildForAllSupportedPlatforms 
+    # Run this job only if the event that triggered the workflow was a push to a tag
+    if: startsWith(github.ref, 'refs/tags/v') 
+    runs-on: ubuntu-latest
+    permissions:
+      # Need write access to repository contents to create releases
+      contents: write 
+    
+    steps:
+      # Download the artifact produced by the build job
+      - name: Download Build Artifact (Android)
+        uses: actions/download-artifact@v4
+        with:
+          # Must match the artifact name from the build job
+          name: Build-Android 
+          # Download to a specific directory
+          path: build-artifact 
+
+      # Optional: List files to verify download (for debugging)
+      - name: List downloaded files
+        run: ls -R build-artifact
+
+      # Create the actual GitHub Release
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          # Define artifacts to attach to the release. 
+          # Use a wildcard based on the download directory. Adjust if needed.
+          artifacts: "build-artifact/*.*" 
+          # Example if you know it's always an APK: "build-artifact/*.apk"
+          # Example if you build APK and AAB: "build-artifact/*.apk,build-artifact/*.aab"
+
+          # Use the tag name that triggered the workflow (e.g., v1.0.0)
+          tag: ${{ github.ref_name }} 
+
+          # Automatically generate release notes from commits since the last tag (optional)
+          generateReleaseNotes: true 
+
+          # GITHUB_TOKEN is automatically provided by Actions with correct permissions
+          token: ${{ secrets.GITHUB_TOKEN }}
