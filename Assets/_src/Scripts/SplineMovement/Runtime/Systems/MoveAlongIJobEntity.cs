@@ -21,11 +21,11 @@ namespace _src.Scripts.SplineMovement.Runtime.Systems
         private void Execute(
             ref SplineLinkComponentData splineLink,
             ref SplineEntityLocationComponentData splineEntityLocation,
-            in SpeedComponentData speedComponentData
+            in SpeedMultiplierComponentData speedMultiplierComponentData
         )
         {
             float curveLength = SplineBlob.Value.GetCurveLength(splineLink.CurveIndex);
-            float offsetThisFrame = speedComponentData.MeterPerSecond * TimeDelta;
+            float offsetThisFrame = speedMultiplierComponentData.Multiplier * TimeDelta;
             splineLink.DistanceInCurve += offsetThisFrame;
             splineLink.TraveledDistance += math.abs(offsetThisFrame);
             float normalizedT = (splineLink.DistanceInCurve + splineLink.DistanceOffset) / curveLength;

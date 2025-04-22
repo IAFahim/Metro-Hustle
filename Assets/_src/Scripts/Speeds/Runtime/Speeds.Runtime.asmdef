@@ -1,22 +1,26 @@
-﻿{
-  "name": "Speeds.Runtime",
-  "rootNamespace": "",
-  "references": [
-    "Unity.Entities",
-    "Unity.Transforms",
-    "Unity.Entities.Hybrid",
-    "Unity.Burst",
-    "Unity.Collections",
-    "Unity.Mathematics",
-    "ECS.Movement.Runtime"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+{
+    "name": "Speeds.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Entities",
+        "Unity.Transforms",
+        "Unity.Entities.Hybrid",
+        "Unity.Burst",
+        "Unity.Collections",
+        "Unity.Mathematics",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Authoring",
+        "BovineLabs.Core.Extensions.Authoring",
+        "BovineLabs.Core.Extensions",
+        "Util.KeyValuePair.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

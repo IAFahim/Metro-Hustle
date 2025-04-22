@@ -4,8 +4,8 @@ using Unity.Entities;
 namespace _src.Scripts.Speeds.Runtime.Datas
 {
     [BurstCompile]
-    public partial struct SpeedComponentData : IComponentData
+    public struct SpeedMultiplierComponentData : IComponentData
     {
-        public float MeterPerSecond;
+        public float Multiplier;
     }
 }
