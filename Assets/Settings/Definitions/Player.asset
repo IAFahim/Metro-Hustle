@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5905b65add14ddab23718b5eed62d01, type: 3}
-  m_Name: SpeedSettings
+  m_Script: {fileID: 11500000, guid: 6030fde919e1488ea7e5855f39cf1cd3, type: 3}
+  m_Name: Player
   m_EditorClassIdentifier: 
-  keys:
-  - key: {fileID: 11400000, guid: 5852c72f903b18541b31276615fafdf5, type: 2}
-    value: 2
+  id: 2
+  friendlyName: 
+  description: 
+  categories: 1
+  prefab: {fileID: 5712382685471617984, guid: 43752cb84a72a4b46ae78fb0ad082894, type: 3}

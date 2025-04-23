@@ -45,7 +45,7 @@ namespace _src.Scripts.Speeds.Runtime.Datas
             if (_speedSettings == null) return false;
             if (_objectDefinition == null) return false;
             if (_objectDefinition.Definition == null) return false;
-            _speedSettings.Set(_objectDefinition.Definition, value);
+            _speedSettings.Set(_objectDefinition.Definition.ID, value);
             return true;
         }
     }
