@@ -1,4 +1,5 @@
-﻿using _src.Scripts.Building_Generate.Runtime.Datas;
+﻿using System.Numerics;
+using _src.Scripts.Building_Generate.Runtime.Datas;
 using _src.Scripts.Building_Generate.Runtime.Gen;
 using _src.Scripts.Dimensions.Runtime.Datas;
 using BovineLabs.Core.Entropy;
@@ -28,24 +29,33 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
             var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
             var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
             var count = spawnGapAndCountComponentData.Count;
-            for (int i = 0; i < count; i--)
+            for (int i = 0; i < count; i++)
             {
                 var position = new float3(x, i, z);
                 var randomUp = GlobalRandom.NextFloat() * 10;
 
-                var groundFloorIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
-                var groundFloor = groundFloorBuffers[groundFloorIndex];
+                var randomIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
+                var randomGroundFloor = groundFloorBuffers[randomIndex];
 
-                var createdEntity = ECB.Instantiate(entityIndexInChunk, groundFloor.Entity);
-                var positionAndRotation = new LocalTransform()
+                var createdEntity = ECB.Instantiate(entityIndexInChunk, randomGroundFloor.Entity);
+                var transform = new LocalTransform()
                 {
                     Position = position + localTransform.Position,
                     Rotation = quaternion.EulerXYZ(0, randomUp, 0),
                     Scale = 1
                 };
-                ECB.AddComponent(entityIndexInChunk, createdEntity, positionAndRotation);
-                spawnGapAndCountComponentData.Count--;
+                ECB.AddComponent(entityIndexInChunk, createdEntity, transform);
+                
+                var float4X4 = transform.ToMatrix();
+                float4X4.c0.x = randomGroundFloor.Scale.x;
+                float4X4.c1.y = randomGroundFloor.Scale.y;
+                float4X4.c2.z = randomGroundFloor.Scale.z;
+                ECB.AddComponent(entityIndexInChunk, createdEntity, new PostTransformMatrix()
+                {
+                    Value = float4X4
+                });
             }
+            spawnGapAndCountComponentData.Count = 0;
         }
     }
 }

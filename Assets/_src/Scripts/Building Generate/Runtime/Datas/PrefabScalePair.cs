@@ -11,8 +11,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
     public class PrefabScalePair
     {
         [SearchContext("t:prefab gf")] public GameObject prefab;
-
-        public float3 scale;
+        public float3 scale = new float3(1, 1, 1);
     }
 }
 #endif
