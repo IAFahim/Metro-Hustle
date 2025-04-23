@@ -9,18 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3faef8418c4bbcb5f3a0a751fec3a3, type: 3}
-  m_Name: CollisionEffectSettings
+  m_Script: {fileID: 11500000, guid: 6030fde919e1488ea7e5855f39cf1cd3, type: 3}
+  m_Name: Building_GF Spawner
   m_EditorClassIdentifier: 
+  id: 0
+  friendlyName: 
   description: 
-  keys:
-  - name: ReduceHealthOther
-    value: 1
-  - name: ReduceHealthSelf
-    value: 2
-  - name: DestroySelf
-    value: 4
-  - name: DestroyOther
-    value: 8
-  - name: AddHealthOther
-    value: 16
+  categories: 1
+  prefab: {fileID: 5223199645560414701, guid: 0bbcb7a8e2f9256449663204e11859ed, type: 3}

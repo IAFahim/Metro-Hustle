@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   keys:
-  - name: obstacles
+  - name: building
     value: 0
     component: 0

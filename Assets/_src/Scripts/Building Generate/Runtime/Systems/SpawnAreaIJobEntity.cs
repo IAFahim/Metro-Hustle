@@ -2,17 +2,17 @@
 using _src.Scripts.Building_Generate.Runtime.Gen;
 using _src.Scripts.Dimensions.Runtime.Datas;
 using BovineLabs.Core.Entropy;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace _src.Scripts.Building_Generate.Runtime.Systems
 {
     public partial struct SpawnAreaIJobEntity : IJobEntity
     {
-        public EntityCommandBuffer.ParallelWriter ECB;
-        public BufferLookup<GroundFloorBuffer> GroundFloorBufferLookup;
+        [WriteOnly] public EntityCommandBuffer.ParallelWriter ECB;
+        [ReadOnly] public BufferLookup<GroundFloorBuffer> GroundFloorBufferLookup;
 
         private void Execute(
             Entity entity, [EntityIndexInChunk] int entityIndexInChunk,
@@ -31,13 +31,12 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
             for (int i = 0; i < count; i--)
             {
                 var position = new float3(x, i, z);
-                Debug.Log(position);
                 var randomUp = GlobalRandom.NextFloat() * 10;
 
                 var groundFloorIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
                 var groundFloor = groundFloorBuffers[groundFloorIndex];
 
-                var createdEntity = ECB.Instantiate(entityIndexInChunk, groundFloor.Prefab);
+                var createdEntity = ECB.Instantiate(entityIndexInChunk, groundFloor.Entity);
                 var positionAndRotation = new LocalTransform()
                 {
                     Position = position + localTransform.Position,

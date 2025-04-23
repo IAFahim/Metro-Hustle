@@ -1,4 +1,5 @@
 ﻿using _src.Scripts.Building_Generate.Runtime.Datas;
+using BovineLabs.Core.ObjectManagement;
 using Unity.Burst;
 using Unity.Entities;
 
@@ -13,6 +14,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
+            state.RequireForUpdate<ObjectDefinitionRegistry>();
             _groundFloorBufferLookup = state.GetBufferLookup<GroundFloorBuffer>(true);
         }
 
@@ -25,7 +27,7 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
             SpawnAreaIJobEntity spawnAreaIJobEntity = new SpawnAreaIJobEntity
             {
                 GroundFloorBufferLookup = _groundFloorBufferLookup,
-                ECB = ecb.AsParallelWriter()
+                ECB = ecb.AsParallelWriter(),
             };
             spawnAreaIJobEntity.Schedule();
             
