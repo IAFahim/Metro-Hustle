@@ -22,18 +22,20 @@ namespace _src.Scripts.Dimensions.Editor.Settings
         {
 #if Aline
             var builder = DrawingManager.GetBuilder();
-            foreach (var (localTransform, areaComponentData) in 
+            foreach (var (localTransform, dimensions) in
                      SystemAPI.Query<RefRO<LocalTransform>, RefRO<Dimensions2DComponentData>>())
             {
-                float3 size = new float3(areaComponentData.ValueRO.Value.x, 0, areaComponentData.ValueRO.Value.y);
+                float3 size = new float3(dimensions.ValueRO.Value.x, 0, dimensions.ValueRO.Value.y);
                 builder.WireBox(localTransform.ValueRO.Position, localTransform.ValueRO.Rotation, size);
             }
 
-            foreach (var (localTransform, areaComponentData) in 
+            foreach (var (localTransform, dimensions) in
                      SystemAPI.Query<RefRO<LocalTransform>, RefRO<Dimensions3DComponentData>>())
             {
-                float3 size = new float3(areaComponentData.ValueRO.Value);
-                builder.WireBox(localTransform.ValueRO.Position, localTransform.ValueRO.Rotation, size);
+                float3 scale = dimensions.ValueRO.Value;
+                var position = localTransform.ValueRO.Position;
+                var rotation = localTransform.ValueRO.Rotation;
+                builder.WireBox(position, rotation, scale);
             }
 
             builder.Dispose();

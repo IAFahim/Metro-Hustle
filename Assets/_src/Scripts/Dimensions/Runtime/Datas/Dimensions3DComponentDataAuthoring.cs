@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _src.Scripts.Dimensions.Runtime.Datas
 {
-    internal class Dimensions3DComponentDataAuthoring : MonoBehaviour
+    public class Dimensions3DComponentDataAuthoring : MonoBehaviour
     {
         public float3 value = new(1, 1, 1);
 
