@@ -1,6 +1,5 @@
 ﻿#if UNITY_EDITOR
 using System;
-using BovineLabs.Core.Authoring.ObjectManagement;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Search;
@@ -11,7 +10,12 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
     public class PrefabScalePair
     {
         [SearchContext("t:prefab gf")] public GameObject prefab;
-        public float3 scale = new float3(1, 1, 1);
+
+        public float3x2 scaleRange = new()
+        {
+            c0 = new float3(1, 1, 1),
+            c1 = new float3(1.1f, 1.1f, 1.1f)
+        };
     }
 }
 #endif

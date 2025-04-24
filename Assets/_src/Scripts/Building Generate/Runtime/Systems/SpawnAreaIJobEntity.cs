@@ -1,8 +1,8 @@
-﻿using System.Numerics;
-using _src.Scripts.Building_Generate.Runtime.Datas;
+﻿using _src.Scripts.Building_Generate.Runtime.Datas;
 using _src.Scripts.Building_Generate.Runtime.Gen;
 using _src.Scripts.Dimensions.Runtime.Datas;
 using BovineLabs.Core.Entropy;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -10,6 +10,7 @@ using Unity.Transforms;
 
 namespace _src.Scripts.Building_Generate.Runtime.Systems
 {
+    [BurstCompile]
     public partial struct SpawnAreaIJobEntity : IJobEntity
     {
         [WriteOnly] public EntityCommandBuffer.ParallelWriter ECB;
@@ -17,23 +18,20 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
 
         private void Execute(
             Entity entity, [EntityIndexInChunk] int entityIndexInChunk,
-            ref SpawnGapAndCountComponentData spawnGapAndCountComponentData,
+            ref SpawnHeightAndCountComponentData spawnHeightAndCountComponentData,
             in LocalTransform localTransform,
-            in Dimensions2DComponentData dimensions2D
+            in Dimensions2DComponentData dimensions
         )
         {
-            if (spawnGapAndCountComponentData.Count <= 0) return;
+            if (spawnHeightAndCountComponentData.Count <= 0) return;
             var groundFloorBuffers = GroundFloorBufferLookup[entity];
-            var xRand = GlobalRandom.NextFloat();
-            var zRand = GlobalRandom.NextFloat();
-            var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
-            var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
-            var count = spawnGapAndCountComponentData.Count;
-            for (int i = 0; i < count; i++)
-            {
-                var position = new float3(x, i, z);
-                var randomUp = GlobalRandom.NextFloat() * 10;
 
+            var count = spawnHeightAndCountComponentData.Count;
+            for (int _ = 0; _ < count; _++)
+            {
+                var x = GlobalRandom.NextFloat() + dimensions.Value.x;
+                var z = GlobalRandom.NextFloat() + dimensions.Value.y;
+                var position = new float3(x, localTransform.Position.y, z);
                 var randomIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
                 var randomGroundFloor = groundFloorBuffers[randomIndex];
 
@@ -41,21 +39,36 @@ namespace _src.Scripts.Building_Generate.Runtime.Systems
                 var transform = new LocalTransform()
                 {
                     Position = position + localTransform.Position,
-                    Rotation = quaternion.EulerXYZ(0, randomUp, 0),
+                    Rotation = localTransform.Rotation,
                     Scale = 1
                 };
-                ECB.AddComponent(entityIndexInChunk, createdEntity, transform);
-                
-                var float4X4 = transform.ToMatrix();
-                float4X4.c0.x = randomGroundFloor.Scale.x;
-                float4X4.c1.y = randomGroundFloor.Scale.y;
-                float4X4.c2.z = randomGroundFloor.Scale.z;
+                ECB.AddComponent(entityIndexInChunk, createdEntity, new LocalToWorld()
+                {
+                    Value = transform.ToMatrix()
+                });
+
+                var scaleX =
+                    GlobalRandom.NextFloat(randomGroundFloor.ScaleRange.c0.x, randomGroundFloor.ScaleRange.c1.x);
+                var scaleY =
+                    GlobalRandom.NextFloat(randomGroundFloor.ScaleRange.c0.y, randomGroundFloor.ScaleRange.c1.y);
+                var scaleZ =
+                    GlobalRandom.NextFloat(randomGroundFloor.ScaleRange.c0.z, randomGroundFloor.ScaleRange.c1.z);
+
+                var float4X4 = new float4x4()
+                {
+                    c0 = new float4(scaleX, 0, 0, 0),
+                    c1 = new float4(0, scaleY, 0, 0),
+                    c2 = new float4(0, 0, scaleZ, 0),
+                    c3 = new float4(0, 0, 0, 1),
+                };
+
                 ECB.AddComponent(entityIndexInChunk, createdEntity, new PostTransformMatrix()
                 {
                     Value = float4X4
                 });
             }
-            spawnGapAndCountComponentData.Count = 0;
+
+            spawnHeightAndCountComponentData.Count = 0;
         }
     }
 }

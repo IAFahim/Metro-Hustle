@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6963bfc920934a47b361fc75f1e4ec6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformUsageFlags: 0
+  transformUsageFlags: 1
   areaComponentData:
     x: 10
     y: 10

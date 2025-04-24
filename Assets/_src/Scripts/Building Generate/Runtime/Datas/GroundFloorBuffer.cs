@@ -8,6 +8,6 @@ namespace _src.Scripts.Building_Generate.Runtime.Datas
     public struct GroundFloorBuffer : IBufferElementData
     {
         public Entity Entity;
-        public float3 Scale;
+        public float3x2 ScaleRange;
     }
 }

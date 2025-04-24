@@ -4,13 +4,14 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 
 namespace _src.Scripts.Dimensions.Editor.Settings
 {
     [BurstCompile]
-    [WorldSystemFilter(WorldSystemFilterFlags.Editor| WorldSystemFilterFlags.Default)]
-    public partial struct Dimensions2DDebugSystem : ISystem
+    [WorldSystemFilter(WorldSystemFilterFlags.Editor)]
+    public partial struct DimensionsDebugSystem : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -24,7 +25,14 @@ namespace _src.Scripts.Dimensions.Editor.Settings
             foreach (var (localTransform, areaComponentData) in 
                      SystemAPI.Query<RefRO<LocalTransform>, RefRO<Dimensions2DComponentData>>())
             {
-                float3 size = new float3(areaComponentData.ValueRO.Float2.x, 0, areaComponentData.ValueRO.Float2.y);
+                float3 size = new float3(areaComponentData.ValueRO.Value.x, 0, areaComponentData.ValueRO.Value.y);
+                builder.WireBox(localTransform.ValueRO.Position, localTransform.ValueRO.Rotation, size);
+            }
+
+            foreach (var (localTransform, areaComponentData) in 
+                     SystemAPI.Query<RefRO<LocalTransform>, RefRO<Dimensions3DComponentData>>())
+            {
+                float3 size = new float3(areaComponentData.ValueRO.Value);
                 builder.WireBox(localTransform.ValueRO.Position, localTransform.ValueRO.Rotation, size);
             }
 

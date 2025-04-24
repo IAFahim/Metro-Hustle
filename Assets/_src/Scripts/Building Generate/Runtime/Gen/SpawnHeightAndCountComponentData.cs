@@ -1,10 +1,10 @@
 ﻿using Unity.Entities;
+using Unity.Mathematics;
 
 namespace _src.Scripts.Building_Generate.Runtime.Gen
 {
-    public struct SpawnGapAndCountComponentData : IComponentData, IEnableableComponent
+    public struct SpawnHeightAndCountComponentData : IComponentData, IEnableableComponent
     {
-        public float Gap;
         public int Count;
     }
 }
