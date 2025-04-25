@@ -1,5 +1,5 @@
 {
-    "name": "CollisionEffect.Runtime",
+    "name": "GameStats.Runtime",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",
@@ -8,11 +8,17 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "BovineLabs.Core"
+        "BovineLabs.Core",
+        "BovineLabs.Core.Authoring",
+        "BovineLabs.Core.Extensions",
+        "BovineLabs.Core.Extensions.Authoring",
+        "BovineLabs.Stats",
+        "BovineLabs.Stats.Data",
+        "BovineLabs.Reaction.Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,

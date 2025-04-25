@@ -11,8 +11,7 @@
         "BovineLabs.Core",
         "BovineLabs.Core.Authoring",
         "BovineLabs.Core.Extensions",
-        "BovineLabs.Core.Extensions.Authoring",
-        "Dimensions.Runtime"
+        "BovineLabs.Core.Extensions.Authoring"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

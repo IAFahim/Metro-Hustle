@@ -4,7 +4,7 @@
         "name": "Md. Ishtiaq Ahamed Fahim",
         "url": "https://github.com/IAFahim"
     },
-    "changelogUrl": "https://github.com/IAFahim/CollisionEffect",
+    "changelogUrl": "https://github.com/IAFahim/GameStats",
      "dependencies": {
         "com.unity.entities": "1.7.2",
         "com.unity.burst": "1.7.2",
@@ -13,14 +13,14 @@
         "com.unity.modules.physics": "1.0.0",
         "com.arongranberg.aline": "1.4.0-exp.2"
     },
-    "description": "CollisionEffect",
-    "displayName": "CollisionEffect",
-    "documentationUrl": "https://github.com/IAFahim/CollisionEffect",
+    "description": "GameStats",
+    "displayName": "GameStats",
+    "documentationUrl": "https://github.com/IAFahim/GameStats",
     "keywords": [
         "ecs",
-        "CollisionEffect"
+        "GameStats"
     ],
-    "name": "collisioneffect",
+    "name": "gamestats",
     "samples": [
         {
             "description": "Examples",

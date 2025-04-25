@@ -4,11 +4,11 @@ using Drawing;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace Scripts.CollisionEffect.Editor
+namespace Scripts.GameStats.Editor
 {
     [BurstCompile]
-    [WorldSystemFilter(WorldSystemFilterFlags.Editor| WorldSystemFilterFlags.Default)]
-    internal partial struct DebugSystemCollisionEffect : ISystem
+    [WorldSystemFilter(WorldSystemFilterFlags.Editor)]
+    internal partial struct DebugSystemGameStats : ISystem
     {
         [BurstCompile]
         public void OnCreate(ref SystemState state)

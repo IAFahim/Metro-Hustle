@@ -1,5 +1,5 @@
 {
-    "name": "CollisionEffect.Editor",
+    "name": "GameStats.Editor",
     "rootNamespace": "",
     "references": [
         "Unity.Entities",
@@ -8,14 +8,18 @@
         "Unity.Burst",
         "Unity.Collections",
         "Unity.Mathematics",
-        "CollisionEffect.Runtime",
-        "ALINE"
+        "GameStats.Runtime",
+        "ALINE",
+        "BovineLabs.Core",
+        "BovineLabs.Core.Authoring",
+        "BovineLabs.Core.Extensions",
+        "BovineLabs.Core.Extensions.Authoring"
     ],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": false,
