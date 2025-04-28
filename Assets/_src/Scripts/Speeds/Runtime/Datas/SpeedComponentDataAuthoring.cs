@@ -1,24 +1,29 @@
 ﻿#if UNITY_EDITOR
+using BovineLabs.Core.Authoring.ObjectManagement;
 using Unity.Entities;
 using UnityEngine;
 
 namespace _src.Scripts.Speeds.Runtime.Datas
 {
+    [RequireComponent(typeof(ObjectDefinitionAuthoring))]
     public class SpeedComponentDataAuthoring : MonoBehaviour
     {
-        public float meterPerSecond = 1.3f;
+        public float multiplier = 1f;
+        
 
         public class SpeedComponentDataBaker : Baker<SpeedComponentDataAuthoring>
         {
             public override void Bake(SpeedComponentDataAuthoring authoring)
             {
+                
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new SpeedComponentData
+                AddComponent(entity, new SpeedMultiplierComponentData
                 {
-                    MeterPerSecond = authoring.meterPerSecond
+                    Multiplier = authoring.multiplier
                 });
             }
         }
+        
     }
 }
 #endif

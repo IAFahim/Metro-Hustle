@@ -12,17 +12,14 @@ public class BuildingSpawnComponentDataScriptAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent<BuildingSpawnComponentData>(entity, new BuildingSpawnComponentData()
+            AddComponent(entity, new BuildingSpawnComponentData()
                 {
                     FloorPrefab = GetEntity(authoring.floors[0],TransformUsageFlags.None),
                     Count=authoring.count,
                     HighestCount =  authoring.highestCount
                    
-                });
-
-
-
-
+                }
+            );
         }
     }
 }

@@ -821,6 +821,7 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
+    Android: BL_CORE_EXTENSIONS;UNITY_PHYSICS_CUSTOM;BL_PHYSICS_ALWAYS_UPDATE;UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS
     Standalone: BL_CORE_EXTENSIONS;UNITY_PHYSICS_CUSTOM;BL_PHYSICS_ALWAYS_UPDATE;UNITY_BURST_EXPERIMENTAL_ATOMIC_INTRINSICS
   additionalCompilerArguments: {}
   platformArchitecture: {}

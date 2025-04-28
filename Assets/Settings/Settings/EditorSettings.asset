@@ -31,6 +31,10 @@ MonoBehaviour:
     Path: Assets/Settings/Definitions
   - Key: reaction.conditions
     Path: Assets/Settings/Schemas/Events/
+  - Key: stats.stats
+    Path: Assets/Settings/Schemas/Stats/
+  - Key: stats.intrinsics
+    Path: Assets/Settings/Schemas/Intrinsics/
   prebakeScenes: []
   startupScene: {fileID: 0}
   defaultSettingsAuthoring: {fileID: 0}
