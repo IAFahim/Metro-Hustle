@@ -1,0 +1,25 @@
+﻿{
+  "name": "StandardCharacters.Common",
+  "rootNamespace": "",
+  "references": [
+    "Unity.Entities",
+    "Unity.Transforms",
+    "Unity.Entities.Hybrid",
+    "Unity.Burst",
+    "Unity.Collections",
+    "Unity.Mathematics",
+    "Unity.Physics",
+    "Unity.CharacterController",
+    "Unity.InputSystem",
+    "Unity.Physics.Hybrid"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": true,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
