@@ -7,7 +7,7 @@ using Unity.Entities;
 namespace Scripts.{{Name}}.Editor
 {
     [BurstCompile]
-    [WorldSystemFilter(WorldSystemFilterFlags.Editor)]
+    [WorldSystemFilter(WorldSystemFilterFlags.Editor| WorldSystemFilterFlags.Default)]
     internal partial struct DebugSystem{{Name}} : ISystem
     {
         [BurstCompile]

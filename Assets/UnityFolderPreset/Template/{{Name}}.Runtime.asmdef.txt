@@ -7,11 +7,7 @@
         "Unity.Entities.Hybrid",
         "Unity.Burst",
         "Unity.Collections",
-        "Unity.Mathematics",
-        "BovineLabs.Core",
-        "BovineLabs.Core.Authoring",
-        "BovineLabs.Core.Extensions",
-        "BovineLabs.Core.Extensions.Authoring"
+        "Unity.Mathematics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

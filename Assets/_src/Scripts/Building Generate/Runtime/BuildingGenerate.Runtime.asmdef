@@ -9,9 +9,8 @@
         "Unity.Collections",
         "Unity.Mathematics",
         "BovineLabs.Core",
-        "BovineLabs.Core.Authoring",
         "BovineLabs.Core.Extensions",
-        "BovineLabs.Core.Extensions.Authoring",
+        "Areas.Runtime",
         "Dimensions.Runtime"
     ],
     "includePlatforms": [],

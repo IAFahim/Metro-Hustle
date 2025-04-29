@@ -18,6 +18,5 @@ MonoBehaviour:
   groups: []
   definitions:
   - {fileID: 11400000, guid: 5852c72f903b18541b31276615fafdf5, type: 2}
-  - {fileID: 11400000, guid: 6f4cb39d5bed9d44ba86cc3d552e2ca6, type: 2}
   excludeGroups: []
   excludeDefinitions: []
