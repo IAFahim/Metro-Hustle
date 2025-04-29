@@ -7,15 +7,14 @@ namespace _src.Scripts.Dimensions.Runtime.Datas
 {
     public class Dimensions2DComponentDataAuthoring : MonoBehaviour
     {
-        public TransformUsageFlags transformUsageFlags = TransformUsageFlags.Dynamic;
-        public float2 areaComponentData = new(10, 10);
+        public float2 value = new(1, 1);
 
         public class AreaComponentDataBaker : Baker<Dimensions2DComponentDataAuthoring>
         {
             public override void Bake(Dimensions2DComponentDataAuthoring authoring)
             {
-                var entity = GetEntity(authoring.transformUsageFlags);
-                AddComponent(entity, new Dimensions2DComponentData { Float2 = authoring.areaComponentData });
+                var entity = GetEntity(TransformUsageFlags.None);
+                AddComponent(entity, new Dimensions2DComponentData { Value = authoring.value });
             }
         }
     }

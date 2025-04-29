@@ -2,51 +2,96 @@
 using _src.Scripts.Building_Generate.Runtime.Gen;
 using _src.Scripts.Dimensions.Runtime.Datas;
 using BovineLabs.Core.Entropy;
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace _src.Scripts.Building_Generate.Runtime.Systems
 {
+    [BurstCompile]
     public partial struct SpawnAreaIJobEntity : IJobEntity
     {
-        public EntityCommandBuffer.ParallelWriter ECB;
-        public BufferLookup<GroundFloorBuffer> GroundFloorBufferLookup;
+        [WriteOnly] public EntityCommandBuffer.ParallelWriter ECB;
+        [ReadOnly] public BufferLookup<GroundFloorBuffer> GroundFloorBufferLookup;
 
         private void Execute(
             Entity entity, [EntityIndexInChunk] int entityIndexInChunk,
-            ref SpawnGapAndCountComponentData spawnGapAndCountComponentData,
+            ref SpawnHeightAndCountComponentData spawnHeightAndCountComponentData,
             in LocalTransform localTransform,
-            in Dimensions2DComponentData dimensions2D
+            in Dimensions2DComponentData dimensions
         )
         {
-            if (spawnGapAndCountComponentData.Count <= 0) return;
+            if (spawnHeightAndCountComponentData.Count <= 0) return;
             var groundFloorBuffers = GroundFloorBufferLookup[entity];
-            var xRand = GlobalRandom.NextFloat();
-            var zRand = GlobalRandom.NextFloat();
-            var x = xRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.x;
-            var z = zRand * spawnGapAndCountComponentData.Gap + dimensions2D.Float2.y;
-            var count = spawnGapAndCountComponentData.Count;
-            for (int i = 0; i < count; i--)
+            
+            var count = spawnHeightAndCountComponentData.Count;
+            for (int _ = 0; _ < count; _++)
             {
-                var position = new float3(x, i, z);
-                Debug.Log(position);
-                var randomUp = GlobalRandom.NextFloat() * 10;
-
-                var groundFloorIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
-                var groundFloor = groundFloorBuffers[groundFloorIndex];
-
-                var createdEntity = ECB.Instantiate(entityIndexInChunk, groundFloor.Prefab);
-                var positionAndRotation = new LocalTransform()
-                {
-                    Position = position + localTransform.Position,
-                    Rotation = quaternion.EulerXYZ(0, randomUp, 0),
-                    Scale = 1
-                };
-                ECB.AddComponent(entityIndexInChunk, createdEntity, positionAndRotation);
-                spawnGapAndCountComponentData.Count--;
+                var randomIndex = GlobalRandom.NextInt(groundFloorBuffers.Length);
+                var randomGroundFloor = groundFloorBuffers[randomIndex];
+                var createdEntity = ECB.Instantiate(entityIndexInChunk, randomGroundFloor.Entity);
+                CalculatePosition(localTransform, dimensions, out var position);
+                SetLocalTransformAndLocalToWorld(entityIndexInChunk, createdEntity, localTransform, position);
+                SetPostTransformScale(entityIndexInChunk, createdEntity, randomGroundFloor);
             }
+            ECB.DestroyEntity(entityIndexInChunk, entity);
+        }
+
+        [BurstCompile]
+        private static void CalculatePosition(
+            in LocalTransform localTransform,
+            in Dimensions2DComponentData dimensions,
+            out float3 position
+        )
+        {
+            var x = GlobalRandom.NextFloat() + dimensions.Value.x;
+            var z = GlobalRandom.NextFloat() + dimensions.Value.y;
+            position = new float3(x, localTransform.Position.y, z);
+        }
+
+        [BurstCompile]
+        private void SetLocalTransformAndLocalToWorld(
+            int entityIndexInChunk, in Entity createdEntity,
+            in LocalTransform localTransform, float3 position
+        )
+        {
+            var transform = new LocalTransform()
+            {
+                Position = position + localTransform.Position,
+                Rotation = localTransform.Rotation,
+                Scale = 1
+            };
+            ECB.AddComponent(entityIndexInChunk, createdEntity, transform);
+            ECB.AddComponent(entityIndexInChunk, createdEntity, new LocalToWorld
+            {
+                Value = transform.ToMatrix()
+            });
+        }
+
+        [BurstCompile]
+        private void SetPostTransformScale(
+            int entityIndexInChunk, in Entity createdEntity,
+            GroundFloorBuffer randomGroundFloor
+        )
+        {
+            var scaleX = GlobalRandom.NextFloat(1, randomGroundFloor.ScaleScaler.x);
+            var scaleY = GlobalRandom.NextFloat(1, randomGroundFloor.ScaleScaler.y);
+            var scaleZ = GlobalRandom.NextFloat(1, randomGroundFloor.ScaleScaler.z);
+
+            var float4X4 = new float4x4
+            {
+                c0 = new float4(scaleX, 0, 0, 0),
+                c1 = new float4(0, scaleY, 0, 0),
+                c2 = new float4(0, 0, scaleZ, 0),
+                c3 = new float4(0, 0, 0, 1),
+            };
+
+            ECB.AddComponent(entityIndexInChunk, createdEntity, new PostTransformMatrix
+            {
+                Value = float4X4
+            });
         }
     }
 }
