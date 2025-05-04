@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: StatSettings
   m_EditorClassIdentifier: 
   statSchemas:
-  - {fileID: 11400000, guid: 09c7afe043804124eba6cefde5705fe0, type: 2}
   - {fileID: 11400000, guid: bd2028683b3f5ef43bdcfd581f8ec590, type: 2}
+  - {fileID: 11400000, guid: 5f35dd79e111ee64fb9911d88f9c7d26, type: 2}
   intrinsicSchemas:
-  - {fileID: 11400000, guid: 1923943f2cc2edf4d97b57d4d3ca4740, type: 2}
   - {fileID: 11400000, guid: 8565abda34f9832488170238e016da29, type: 2}

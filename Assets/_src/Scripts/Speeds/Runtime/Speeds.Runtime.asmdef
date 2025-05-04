@@ -12,7 +12,10 @@
         "BovineLabs.Core.Authoring",
         "BovineLabs.Core.Extensions.Authoring",
         "BovineLabs.Core.Extensions",
-        "Util.KeyValuePair.Runtime"
+        "Util.KeyValuePair.Runtime",
+        "BovineLabs.Stats",
+        "BovineLabs.Stats.Authoring",
+        "BovineLabs.Stats.Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
