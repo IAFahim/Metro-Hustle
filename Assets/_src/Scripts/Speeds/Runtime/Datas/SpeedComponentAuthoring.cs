@@ -1,10 +1,12 @@
-﻿using Unity.Entities;
+﻿using BovineLabs.Stats.Data;
+using Unity.Entities;
 using UnityEngine;
 
 namespace _src.Scripts.Speeds.Runtime.Datas
 {
     public class SpeedComponentAuthoring : MonoBehaviour
     {
+        public IntrinsicKey intrinsicKey;
         public class SpeedComponentBaker : Baker<SpeedComponentAuthoring>
         {
             public override void Bake(SpeedComponentAuthoring authoring)
