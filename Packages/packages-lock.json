@@ -31,7 +31,7 @@
         "com.unity.entities": "1.4.0-exp.2",
         "com.unity.logging": "1.3.6"
       },
-      "hash": "6a29f49deeda0f2283b020a8af67990db856eb13"
+      "hash": "4b767f15720a4d909a94f78563fda9e3d491f05e"
     },
     "com.bovinelabs.reaction": {
       "version": "https://gitlab.com/tertle/com.bovinelabs.reaction.git",
