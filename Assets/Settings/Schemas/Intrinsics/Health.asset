@@ -16,4 +16,4 @@ MonoBehaviour:
   key:
     Value: 0
   defaultValue: 2
-  range: {x: 2, y: 5}
+  range: {x: 1, y: 1000}

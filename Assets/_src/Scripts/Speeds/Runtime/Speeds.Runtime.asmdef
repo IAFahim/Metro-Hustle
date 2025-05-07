@@ -15,7 +15,12 @@
         "Util.KeyValuePair.Runtime",
         "BovineLabs.Stats",
         "BovineLabs.Stats.Authoring",
-        "BovineLabs.Stats.Data"
+        "BovineLabs.Stats.Data",
+        "Unity.Physics",
+        "Unity.Physics.Hybrid",
+        "Unity.Physics.Custom",
+        "ScriptableBuildPipelineTests",
+        "Unity.Logging"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
