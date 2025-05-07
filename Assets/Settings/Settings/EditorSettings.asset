@@ -35,11 +35,9 @@ MonoBehaviour:
     Path: Assets/Settings/Schemas/Stats/
   - Key: stats.intrinsics
     Path: Assets/Settings/Schemas/Intrinsics/
+  - Key: distort.control
+    Path: Assets/Settings/Schemas/Control/
   prebakeScenes: []
-  startupScene: {fileID: 0}
+  startupScene: {fileID: 102900000, guid: 83d96ff3fb25ad5489ec2c26bd70cd8f, type: 3}
   defaultSettingsAuthoring: {fileID: 0}
-  settingAuthoring:
-  - World: service
-    Authoring: {fileID: 0}
-  - World: shared
-    Authoring: {fileID: 0}
+  settingAuthoring: []
