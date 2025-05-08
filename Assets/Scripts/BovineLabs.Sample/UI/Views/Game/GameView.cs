@@ -8,10 +8,10 @@ namespace BovineLabs.Sample.UI.Views.Game
 
     public class GameView : GameBaseView<GameViewModel>
     {
-        public GameView(/*AbilityToolbarView abilityToolbarView*/)
+        public GameView()
             : base(new GameViewModel())
         {
-            /*this.Add(abilityToolbarView);*/
+            
         }
     }
 }

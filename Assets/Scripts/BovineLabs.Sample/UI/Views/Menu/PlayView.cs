@@ -2,6 +2,8 @@
 //     Copyright (c) BovineLabs. All rights reserved.
 // </copyright>
 
+using BovineLabs.Core;
+
 namespace BovineLabs.Sample.UI.Views.Menu
 {
     using BovineLabs.Anchor;
@@ -25,18 +27,25 @@ namespace BovineLabs.Sample.UI.Views.Menu
             : base(viewModel)
         {
             this.AddToClassList(UssClassName);
-            
+            var privateButton = new Button(this.PrivateGame)
+            {
+                title = PrivateText,
+                subtitle = PrivateSubText,
+            };
+
+            this.Add(privateButton);
         }
 
         private void PrivateGame()
         {
             this.ViewModel.Value.Play.TryProduce();
-            this.ToGoLoading();
+            BovineLabsBootstrap.Instance.CreateGameWorld();
+            ToGoToGame();
         }
 
-        private void ToGoLoading()
+        private void ToGoToGame()
         {
-            this.Navigate(Actions.go_to_loading);
+            this.Navigate(Actions.go_to_game);
         }
     }
 }
