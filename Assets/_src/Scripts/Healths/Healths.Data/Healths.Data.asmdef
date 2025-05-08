@@ -19,7 +19,10 @@
         "Unity.AppUI",
         "Unity.AppUI.MVVM",
         "BovineLabs.Stats",
-        "BovineLabs.Stats.Authoring"
+        "BovineLabs.Stats.Authoring",
+        "BovineLabs.Stats.Data",
+        "BovineLabs.Reaction",
+        "BovineLabs.Reaction.Authoring"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

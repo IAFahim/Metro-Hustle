@@ -32,7 +32,6 @@ namespace _src.Scripts.Speeds.Runtime.Systems
                 IntrinsicWriter intrinsicWriter = _intrinsicWriterLookup[entity];
                 
                 var newHealth = _intrinsicWriterLookup[entity].Add(healthKey, 1);
-                debug.Debug($"Health: {health}, newHealth: {newHealth}");
 
             }
         }

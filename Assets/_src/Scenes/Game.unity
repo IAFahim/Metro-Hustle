@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - {fileID: 11400000, guid: 85c76754c2d327847a3d245a021e0299, type: 2}
+  - {fileID: 11400000, guid: 5bcb1f6ae4f85784c9631a9615418ad6, type: 2}
   - {fileID: 11400000, guid: c5c966ffb4d247741aa6a5e35f7258a6, type: 2}
   - {fileID: 11400000, guid: a4ee02d43d44e624e9e6ac36e09d72b5, type: 2}
 --- !u!4 &686383864
@@ -234,6 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 776023113}
   - component: {fileID: 776023112}
+  - component: {fileID: 776023114}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -268,6 +270,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &776023114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776023111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7305cdf55c354c0eb811d408fe38ad23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AddStats: 0
+  StatDefaults: []
+  StatDefaultGroups: []
+  StatsCanBeModified: 0
+  AddIntrinsics: 1
+  IntrinsicDefaults:
+  - Intrinsic: {fileID: 11400000, guid: 8565abda34f9832488170238e016da29, type: 2}
+    Value: 0
+  IntrinsicDefaultGroups: []
+  Initialize:
+    CopyFrom: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

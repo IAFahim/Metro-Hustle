@@ -2,16 +2,18 @@
 //     Copyright (c) BovineLabs. All rights reserved.
 // </copyright>
 
+using _src.Scripts.Healths.Healths.Data;
+
 namespace BovineLabs.Sample.UI.Views.Game
 {
     using BovineLabs.Sample.UI.ViewModels.Game;
 
-    public class GameView : GameBaseView<GameViewModel>
+    public class GameView : GameBaseView<HealthViewModel>
     {
-        public GameView()
-            : base(new GameViewModel())
+        public GameView(HealthView healthView)
+            : base(new HealthViewModel())
         {
-            
+            Add(healthView);
         }
     }
 }

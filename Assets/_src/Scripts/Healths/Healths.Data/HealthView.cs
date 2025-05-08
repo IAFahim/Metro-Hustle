@@ -20,7 +20,7 @@ public class HealthView : View<HealthViewModel>
 
         var healthTextValue = new Text { name = "health-text-value" };
         healthTextValue.dataSource = this.ViewModel;
-        healthTextValue.SetBindingToUI(nameof(Text.text), nameof(HealthViewModel.HealthText));
+        healthTextValue.SetBindingToUI(nameof(healthTextValue.text), nameof(HealthViewModel.CurrentHealth));
         this.Add(healthTextValue);
 
         var healthBar = new ProgressBar { name = "health-bar", lowValue = 0, highValue = 1 };
