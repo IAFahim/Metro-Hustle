@@ -9,7 +9,7 @@ namespace _src.Scripts.Healths.Healths.Data
         {
             public override void Bake(GameScreenTagAuthoring authoring)
             {
-                var entity = GetEntity(TransformUsageFlags.Dynamic);
+                var entity = GetEntity(TransformUsageFlags.None);
                 AddComponent<GameScreenTag>(entity);
             }
         }
