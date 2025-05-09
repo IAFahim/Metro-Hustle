@@ -16,9 +16,8 @@ namespace _src.Scripts.Healths.Healths.Data
 
         [CreateProperty(ReadOnly = true)] public int MaxHealth => this.Value.MaxHealth;
 
-        [CreateProperty(ReadOnly = true)] public string HealthText => $"{this.CurrentHealth} / {this.MaxHealth}";
-
-        [CreateProperty(ReadOnly = true)]
+        public string HealthText => $"{this.CurrentHealth} / {this.MaxHealth}";
+        
         public float HealthNormalized => this.MaxHealth > 0 ? (float)this.CurrentHealth / this.MaxHealth : 0f;
 
         [Serializable]
