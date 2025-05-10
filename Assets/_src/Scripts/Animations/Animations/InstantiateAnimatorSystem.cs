@@ -25,7 +25,8 @@ namespace _src.Scripts.Animations.Animations
                 ecb.AddComponent(entity, new AnimatorComponent
                 {
                     Ref = gameObject.GetComponent<Animator>(),
-                    State = 0
+                    CurrentState = 0,
+                    OldState = 0
                 });
                 ecb.RemoveComponent<AnimatorAssetIndexComponent>(entity);
             }

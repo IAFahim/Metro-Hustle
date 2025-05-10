@@ -1,5 +1,4 @@
 ﻿using _src.Scripts.Animations.Animations.Data;
-using BovineLabs.Core.Input;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -11,12 +10,12 @@ namespace _src.Scripts.Animations.Animations
     public partial struct SyncAnimationData : ISystem
     {
         private static readonly int StateHash = Animator.StringToHash("state");
+        private static readonly int Mirror = Animator.StringToHash("mirror");
 
         public void OnUpdate(ref SystemState state)
         {
-            var inputComponent = SystemAPI.GetSingleton<InputComponent>();
             foreach (var (animatorComponent, localTransform) in SystemAPI
-                         .Query<RefRO<AnimatorComponent>, RefRO<LocalTransform>>())
+                         .Query<RefRW<AnimatorComponent>, RefRO<LocalTransform>>())
             {
                 var position = localTransform.ValueRO.Position;
                 var rotation = localTransform.ValueRO.Rotation;
@@ -24,7 +23,13 @@ namespace _src.Scripts.Animations.Animations
                     position,
                     rotation
                 );
-                animatorComponent.ValueRO.Ref.Value.SetInteger(StateHash, animatorComponent.ValueRO.State);
+                var currentState = animatorComponent.ValueRO.CurrentState;
+                var oldState = animatorComponent.ValueRO.OldState;
+                if (currentState == oldState) return;
+                animatorComponent.ValueRW.OldState = animatorComponent.ValueRO.CurrentState;
+                if (currentState < 0 && oldState > 0) animatorComponent.ValueRO.Ref.Value.SetBool(Mirror, true);
+                else if (currentState > 0 && oldState < 0) animatorComponent.ValueRO.Ref.Value.SetBool(Mirror, false);
+                animatorComponent.ValueRO.Ref.Value.SetInteger(StateHash, math.abs(currentState));
             }
         }
     }
