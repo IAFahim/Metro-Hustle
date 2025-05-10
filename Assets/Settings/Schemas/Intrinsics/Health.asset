@@ -15,5 +15,5 @@ MonoBehaviour:
   isGlobal: 0
   key:
     Value: 0
-  defaultValue: 2
-  range: {x: 1, y: 1000}
+  defaultValue: 0
+  range: {x: 0, y: 2147483647}
