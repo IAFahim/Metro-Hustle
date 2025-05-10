@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d04af98ee16872345a2a0df3486ae972, type: 3}
       propertyPath: m_Name
-      value: Aj@Running
+      value: Character Base
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: d04af98ee16872345a2a0df3486ae972, type: 3}
       propertyPath: m_Avatar
@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c00c0616cb303ad479ae542ed3c38371, type: 2}
+    - target: {fileID: 5866666021909216657, guid: d04af98ee16872345a2a0df3486ae972, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 825894089210680117, guid: d04af98ee16872345a2a0df3486ae972, type: 3}

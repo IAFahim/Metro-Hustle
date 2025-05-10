@@ -38,6 +38,6 @@ MonoBehaviour:
   - Key: distort.control
     Path: Assets/Settings/Schemas/Control/
   prebakeScenes: []
-  startupScene: {fileID: 102900000, guid: 83d96ff3fb25ad5489ec2c26bd70cd8f, type: 3}
+  startupScene: {fileID: 0}
   defaultSettingsAuthoring: {fileID: 0}
   settingAuthoring: []
