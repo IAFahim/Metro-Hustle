@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 2063062656}
   - component: {fileID: 2063062658}
   - component: {fileID: 2063062657}
+  - component: {fileID: 2063062659}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -251,6 +252,21 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &2063062659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063062655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46543774a46b468882fe50734dbbfe33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCharacterIndex: 0
+  bodies: {fileID: 11400000, guid: 3e84f225e9adff54cbb58ece09d14d34, type: 2}
+  caches: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

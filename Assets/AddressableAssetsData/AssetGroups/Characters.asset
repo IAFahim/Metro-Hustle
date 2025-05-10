@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Characters
   m_GUID: 981e86835d5a6a94a8b9b89e093f72cf
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 811f985cd164caf4bb3eee8dad2df33c
+    m_Address: Assets/_src/Prefabs/Character/Character Base.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a27b57eea9180c048b50a2f8830b7de7, type: 2}
   m_SchemaSet:

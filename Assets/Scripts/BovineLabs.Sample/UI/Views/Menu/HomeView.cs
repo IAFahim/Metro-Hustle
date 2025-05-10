@@ -2,6 +2,8 @@
 //     Copyright (c) BovineLabs. All rights reserved.
 // </copyright>
 
+using BovineLabs.Core;
+
 namespace BovineLabs.Sample.UI.Views.Menu
 {
     using BovineLabs.Anchor;
@@ -120,7 +122,13 @@ namespace BovineLabs.Sample.UI.Views.Menu
 
         private void Play()
         {
-            this.Navigate(Actions.home_to_play);
+            BovineLabsBootstrap.Instance.CreateGameWorld();
+            ToGoToGame();
+        }
+
+        private void ToGoToGame()
+        {
+            this.Navigate(Actions.go_to_game);
         }
 
         private void Load()

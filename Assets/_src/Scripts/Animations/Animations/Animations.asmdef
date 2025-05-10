@@ -21,7 +21,8 @@
         "Unity.Physics",
         "Unity.Transforms",
         "Unity.Scenes",
-        "RawInput"
+        "RawInput",
+        "Prefabs.Data"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

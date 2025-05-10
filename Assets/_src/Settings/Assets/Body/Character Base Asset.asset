@@ -9,11 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6030fde919e1488ea7e5855f39cf1cd3, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 82dfe002bd1f4907ae57a3b116d13230, type: 3}
+  m_Name: Character Base Asset
   m_EditorClassIdentifier: 
-  id: 2
+  id: 0
   friendlyName: 
   description: 
-  categories: 1
-  prefab: {fileID: 5712382685471617984, guid: 43752cb84a72a4b46ae78fb0ad082894, type: 3}
+  assetReferenceGameObject:
+    m_AssetGUID: 811f985cd164caf4bb3eee8dad2df33c
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
